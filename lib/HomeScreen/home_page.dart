@@ -281,80 +281,66 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SizedBox(
-                height: 780,
+                height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: restaurant.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 260,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          WidgetAnimator(
-                            incomingEffect:
-                                WidgetTransitionEffects.incomingSlideInFromLeft(
-                                    delay: const Duration(seconds: 1)),
-                            child: Container(
-                              height: 140,
-                              decoration: BoxDecoration(
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            WidgetAnimator(
+                              incomingEffect: WidgetTransitionEffects
+                                  .incomingSlideInFromLeft(
+                                      delay: const Duration(seconds: 1)),
+                              child: Container(
+                                height: 140,
+                                decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          restaurant[index]["images"])),
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.black),
+                                    fit: BoxFit.cover,
+                                    image:
+                                        AssetImage(restaurant[index]["images"]),
+                                  ),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                      bottom: Radius.circular(20)),
+                                ),
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            children: [
-                              WidgetAnimator(
-                                incomingEffect: WidgetTransitionEffects
-                                    .incomingSlideInFromLeft(
-                                        delay: const Duration(seconds: 2)),
-                                child: Row(
-                                  children: [
-                                    Text(
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  WidgetAnimator(
+                                    incomingEffect: WidgetTransitionEffects
+                                        .incomingSlideInFromLeft(
+                                            delay: const Duration(seconds: 2)),
+                                    child: Text(
                                       restaurant[index]["names"],
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 3)),
-                                        child: const Text(
-                                          "Burger - Chicken - Rice - Wings",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ),
-                                    ],
                                   ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Column(
-                                children: [
+                                  const SizedBox(height: 8),
+                                  WidgetAnimator(
+                                    incomingEffect: WidgetTransitionEffects
+                                        .incomingSlideInFromLeft(
+                                            delay: const Duration(seconds: 3)),
+                                    child: const Text(
+                                      "Burger - Chicken - Rice - Wings",
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
                                   Row(
                                     children: [
                                       WidgetAnimator(
@@ -417,14 +403,14 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),
