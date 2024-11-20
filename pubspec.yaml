@@ -42,6 +42,9 @@ dependencies:
   shared_preferences: ^2.3.3
   google_fonts: ^6.2.1
   pinput: ^5.0.0
+  get: ^4.6.6
+  responsive_grid_list: ^1.4.0
+  widget_and_text_animator: ^1.1.5
   
  
   
