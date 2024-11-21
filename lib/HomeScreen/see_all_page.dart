@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/HomeScreen/see_all_page.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SeeAllPage extends StatefulWidget {
+  const SeeAllPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SeeAllPage> createState() => _SeeAllPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SeeAllPageState extends State<SeeAllPage> {
   List<Map<String, dynamic>> restaurant = [
     {
       "names": "Rose Restaurant",
@@ -28,11 +27,11 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List<Map<String, dynamic>> products = [
-    {"name": "All", "image": "assets/images/fire.png"},
-    {"name": "Hot Dog", "image": "assets/images/hot-dog.png"},
-    {"name": "Burger", "image": "assets/images/burger.png"},
-    {"name": "Samosa", "image": "assets/images/samosa.png"},
-    {"name": "Chicken", "image": "assets/images/chicken.png"},
+    {"name": "Chicken", "image": "assets/images/chicken.png", "price": "50"},
+    {"name": "Hot Dog", "image": "assets/images/hot-dog.png", "price": "60"},
+    {"name": "Burger", "image": "assets/images/burger.png", "price": "70"},
+    {"name": "Samosa", "image": "assets/images/samosa.png", "price": "80"},
+    {"name": "Chicken", "image": "assets/images/chicken.png", "price": "45"},
   ];
   int selectedIndex = -1;
 
@@ -161,12 +160,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SeeAllPage()));
-                    },
+                    onPressed: () {},
                     child: const Column(
                       children: [
                         Row(
@@ -192,7 +186,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: 50,
+                height: 150,
                 child: ResponsiveGridList(
                   listViewBuilderOptions: ListViewBuilderOptions(
                     scrollDirection: Axis.horizontal,
@@ -222,30 +216,96 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey.shade200,
-                                ),
-                                child: Image.asset(
-                                  products[index]["image"],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                products[index]["name"],
-                                style: const TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.clip,
-                              ),
-                            ),
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    WidgetAnimator(
+                                      incomingEffect: WidgetTransitionEffects
+                                          .incomingSlideInFromTop(
+                                              duration: Duration(seconds: 2)),
+                                      child: Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    products[index]["image"]))),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        WidgetAnimator(
+                                          incomingEffect:
+                                              WidgetTransitionEffects
+                                                  .incomingSlideInFromBottom(
+                                                      duration:
+                                                          Duration(seconds: 3)),
+                                          child: Text(
+                                            products[index]["name"],
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                    WidgetAnimator(
+                                      incomingEffect: WidgetTransitionEffects
+                                          .incomingSlideInFromBottom(
+                                              duration: Duration(seconds: 4)),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                "Starting",
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  RichText(
+                                                      text: TextSpan(children: [
+                                                    const TextSpan(
+                                                        text: "\$",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                    TextSpan(
+                                                        text: products[index]
+                                                            ["price"],
+                                                        style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold))
+                                                  ]))
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )),
                           ],
                         ),
                       ),
