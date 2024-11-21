@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
+import 'package:smiley_foods/HomeScreen/searching_page.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class SeeAllPage extends StatefulWidget {
@@ -313,7 +314,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -322,7 +323,12 @@ class _SeeAllPageState extends State<SeeAllPage> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchingPage()));
+                    },
                     child: const Column(
                       children: [
                         Row(

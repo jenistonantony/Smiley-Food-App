@@ -36,7 +36,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     child: const Text(
                       "Skip",
-                      style: TextStyle(color: primaryColor),
+                      style: TextStyle(
+                          color: primaryColor, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SmoothPageIndicator(
@@ -59,7 +60,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     child: const Text(
                       "Next",
-                      style: TextStyle(color: primaryColor),
+                      style: TextStyle(
+                          color: primaryColor, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
