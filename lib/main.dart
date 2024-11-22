@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:smiley_foods/SplashScreen/splash_screen.dart';
@@ -17,7 +18,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    // return MaterialApp(
+    //   theme: ThemeData(
+    //       textTheme:
+    //           GoogleFonts.ptSansCaptionTextTheme(Theme.of(context).textTheme)),
+    //   debugShowCheckedModeBanner: false,
+    //   home: const SplashScreen(),
+    // );
+    return GetMaterialApp(
       theme: ThemeData(
           textTheme:
               GoogleFonts.ptSansCaptionTextTheme(Theme.of(context).textTheme)),

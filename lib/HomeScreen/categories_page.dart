@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/HomeScreen/searching_page.dart';
+import 'package:smiley_foods/HomeScreen/food_screen.dart';
+import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
-class SeeAllPage extends StatefulWidget {
-  const SeeAllPage({super.key});
+class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({super.key});
 
   @override
-  State<SeeAllPage> createState() => _SeeAllPageState();
+  State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
-class _SeeAllPageState extends State<SeeAllPage> {
+class _CategoriesPageState extends State<CategoriesPage> {
   List<Map<String, dynamic>> restaurant = [
     {
       "names": "Rose Restaurant",
@@ -41,6 +42,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(
@@ -160,11 +162,16 @@ class _SeeAllPageState extends State<SeeAllPage> {
                     "All Categories",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Column(
-                      children: [
-                        Row(
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const FoodScreen()));
+                        },
+                        child: const Row(
                           children: [
                             Text(
                               "See All",
@@ -180,8 +187,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
                             )
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -228,7 +235,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
                                     WidgetAnimator(
                                       incomingEffect: WidgetTransitionEffects
                                           .incomingSlideInFromTop(
-                                              duration: Duration(seconds: 2)),
+                                              duration:
+                                                  const Duration(seconds: 2)),
                                       child: Container(
                                         height: 80,
                                         width: 80,
@@ -247,8 +255,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
                                           incomingEffect:
                                               WidgetTransitionEffects
                                                   .incomingSlideInFromBottom(
-                                                      duration:
-                                                          Duration(seconds: 3)),
+                                                      duration: const Duration(
+                                                          seconds: 3)),
                                           child: Text(
                                             products[index]["name"],
                                             style: const TextStyle(
@@ -261,7 +269,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
                                     WidgetAnimator(
                                       incomingEffect: WidgetTransitionEffects
                                           .incomingSlideInFromBottom(
-                                              duration: Duration(seconds: 4)),
+                                              duration:
+                                                  const Duration(seconds: 4)),
                                       child: Column(
                                         children: [
                                           Row(
@@ -314,7 +323,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -322,16 +331,17 @@ class _SeeAllPageState extends State<SeeAllPage> {
                     "Open Restaurants",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SearchingPage()));
-                    },
-                    child: const Column(
-                      children: [
-                        Row(
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const OpenRestaurantPage()));
+                        },
+                        child: const Row(
                           children: [
                             Text(
                               "See All",
@@ -347,8 +357,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
                             )
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),

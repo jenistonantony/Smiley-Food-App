@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smiley_foods/AuthScreen/login_page.dart';
 import 'package:smiley_foods/Components/color.dart';
+import 'package:smiley_foods/controller/register_controller.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  RegisterController register = Get.put(RegisterController());
   final TextEditingController controller = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -42,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       const Center(
         child: Text(
-          "Sign Up",
+          "Register",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
@@ -50,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         height: 10,
       ),
       const Text(
-        "Please sign up to get started",
+        "Please Register to get started",
         style: TextStyle(
             fontSize: 15, fontWeight: FontWeight.bold, color: Colors.grey),
       ),
@@ -58,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         height: 20,
       ),
       Container(
-        height: 445,
+        height: 350,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.grey.shade300,
@@ -71,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const Text(
                 "Name",
                 style: TextStyle(
-                    color: PrimaryColorgreen,
+                    color: primaryColorgreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 15),
               ),
@@ -98,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const Text(
                 "Email",
                 style: TextStyle(
-                    color: PrimaryColorgreen,
+                    color: primaryColorgreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 15),
               ),
@@ -124,9 +127,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 20,
               ),
               const Text(
-                "Password",
+                "Phone Number",
                 style: TextStyle(
-                    color: PrimaryColorgreen,
+                    color: primaryColorgreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 15),
               ),
@@ -139,53 +142,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(15)),
                   child: TextFormField(
                     // showCursor: false,
-                    keyboardType: TextInputType.visiblePassword,
+                    keyboardType: TextInputType.phone,
+
                     controller: passwordController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Enter the password",
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        prefixIcon: const Icon(Icons.password_rounded),
-                        suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.remove_red_eye,
-                              color: Colors.grey,
-                            ))),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Enter the phone number",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Icon(Icons.phone),
+                    ),
                   )),
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                "Re-Type Password",
-                style: TextStyle(
-                    color: PrimaryColorgreen,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: TextFormField(
-                    // showCursor: false,
-                    keyboardType: TextInputType.visiblePassword,
-                    controller: repasswordController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Enter the password",
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        prefixIcon: const Icon(Icons.password_rounded),
-                        suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.remove_red_eye_sharp,
-                              color: Colors.grey,
-                            ))),
-                  )),
             ],
           ),
         ),
@@ -200,10 +169,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               color: primaryColor, borderRadius: BorderRadius.circular(15)),
           child: TextButton(
               onPressed: () {
-                Navigator.pop(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                register.registerUser(
+                    userName: controller.text.toString(),
+                    email: emailController.text.toString(),
+                    mobileNo: passwordController.text.toString());
+                // Navigator.pop(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const Lo2ginScreen()));
               },
               child: const Text(
                 "SIGN UP",

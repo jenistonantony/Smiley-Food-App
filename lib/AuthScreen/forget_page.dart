@@ -69,7 +69,7 @@ class _ForgetPageState extends State<ForgetPage> {
               const Text(
                 "Email",
                 style: TextStyle(
-                    color: PrimaryColorgreen,
+                    color: primaryColorgreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 15),
               ),

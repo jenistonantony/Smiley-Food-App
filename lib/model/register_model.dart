@@ -1,23 +1,23 @@
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+ResigterModel welcomeFromJson(String str) => ResigterModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(ResigterModel data) => json.encode(data.toJson());
 
-class Welcome {
+class ResigterModel {
   int? code;
   bool? status;
   String? message;
   WelcomeData? data;
 
-  Welcome({
+  ResigterModel({
     this.code,
     this.status,
     this.message,
     this.data,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory ResigterModel.fromJson(Map<String, dynamic> json) => ResigterModel(
         code: json["code"],
         status: json["status"],
         message: json["message"],

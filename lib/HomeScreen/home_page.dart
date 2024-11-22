@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/HomeScreen/see_all_page.dart';
+import 'package:smiley_foods/HomeScreen/categories_page.dart';
+import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(
@@ -160,33 +162,34 @@ class _HomePageState extends State<HomePage> {
                     "All Categories",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SeeAllPage()));
-                    },
-                    child: const Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CategoriesPage()));
+                            },
+                            child: const Text(
                               "See All",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   color: primaryColor),
                             ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 20,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 20,
+                            color: Colors.grey,
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -254,169 +257,192 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  const Text(
-                    "Open Restaurants",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Column(
-                      children: [
-                        Row(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Open Restaurants",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const OpenRestaurantPage()));
+                        },
+                        child: const Row(
                           children: [
                             Text(
                               "See All",
                               style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: primaryColor),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
                             ),
                             Icon(
                               Icons.arrow_forward_ios_rounded,
                               size: 20,
                               color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: restaurant.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            WidgetAnimator(
-                              incomingEffect: WidgetTransitionEffects
-                                  .incomingSlideInFromLeft(
-                                      delay: const Duration(seconds: 1)),
-                              child: Container(
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image:
-                                        AssetImage(restaurant[index]["images"]),
-                                  ),
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                      bottom: Radius.circular(20)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  WidgetAnimator(
-                                    incomingEffect: WidgetTransitionEffects
-                                        .incomingSlideInFromLeft(
-                                            delay: const Duration(seconds: 2)),
-                                    child: Text(
-                                      restaurant[index]["names"],
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  WidgetAnimator(
-                                    incomingEffect: WidgetTransitionEffects
-                                        .incomingSlideInFromLeft(
-                                            delay: const Duration(seconds: 3)),
-                                    child: const Text(
-                                      "Burger - Chicken - Rice - Wings",
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: Image.asset(
-                                          "assets/images/star.png",
-                                          height: 20,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: const Text("4.7"),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: Image.asset(
-                                          "assets/images/delivery-truck.png",
-                                          height: 20,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: const Text("Free"),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: Image.asset(
-                                          "assets/images/clock.png",
-                                          height: 20,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: const Text("20 min"),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
                             ),
                           ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
+                    ],
+                  ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: restaurant.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        verticalDirection: VerticalDirection.up,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                WidgetAnimator(
+                                  incomingEffect: WidgetTransitionEffects
+                                      .incomingSlideInFromLeft(
+                                    delay: const Duration(seconds: 1),
+                                  ),
+                                  child: Container(
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            restaurant[index]["images"]),
+                                      ),
+                                      borderRadius: const BorderRadius.vertical(
+                                        top: Radius.circular(20),
+                                        bottom: Radius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      WidgetAnimator(
+                                        incomingEffect: WidgetTransitionEffects
+                                            .incomingSlideInFromLeft(
+                                          delay: const Duration(seconds: 2),
+                                        ),
+                                        child: Text(
+                                          restaurant[index]["names"],
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      WidgetAnimator(
+                                        incomingEffect: WidgetTransitionEffects
+                                            .incomingSlideInFromLeft(
+                                          delay: const Duration(seconds: 3),
+                                        ),
+                                        child: const Text(
+                                          "Burger - Chicken - Rice - Wings",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromLeft(
+                                              delay: const Duration(seconds: 4),
+                                            ),
+                                            child: Image.asset(
+                                              "assets/images/star.png",
+                                              height: 20,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromLeft(
+                                              delay: const Duration(seconds: 4),
+                                            ),
+                                            child: const Text("4.7"),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromLeft(
+                                              delay: const Duration(seconds: 4),
+                                            ),
+                                            child: Image.asset(
+                                              "assets/images/delivery-truck.png",
+                                              height: 20,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromLeft(
+                                              delay: const Duration(seconds: 4),
+                                            ),
+                                            child: const Text("Free"),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromLeft(
+                                              delay: const Duration(seconds: 4),
+                                            ),
+                                            child: Image.asset(
+                                              "assets/images/clock.png",
+                                              height: 20,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromLeft(
+                                              delay: const Duration(seconds: 4),
+                                            ),
+                                            child: const Text("20 min"),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  )
+                ],
+              )
             ],
           ),
         ),

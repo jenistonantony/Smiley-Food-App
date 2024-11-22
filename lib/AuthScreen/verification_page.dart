@@ -125,7 +125,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   const Text(
                     "Enter Code",
                     style: TextStyle(
-                        color: PrimaryColorgreen,
+                        color: primaryColorgreen,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),
