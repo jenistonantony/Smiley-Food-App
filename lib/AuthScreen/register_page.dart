@@ -60,102 +60,104 @@ class _RegisterScreenState extends State<RegisterScreen> {
       const SizedBox(
         height: 20,
       ),
-      Container(
-        height: 350,
-        width: MediaQuery.of(context).size.width * 0.8,
-        decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Name",
-                style: TextStyle(
-                    color: primaryColorgreen,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: TextFormField(
-                    // showCursor: false,
-                    keyboardType: TextInputType.name,
-                    controller: controller,
-                    decoration: const InputDecoration(
+      SingleChildScrollView(
+        child: Container(
+          height: 360,
+          width: MediaQuery.of(context).size.width * 0.8,
+          decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Name",
+                  style: TextStyle(
+                      color: primaryColorgreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                    height: 45,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: TextFormField(
+                      // showCursor: false,
+                      keyboardType: TextInputType.name,
+                      controller: controller,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Enter the Name",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          prefixIcon: Icon(Icons.person)),
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Email",
+                  style: TextStyle(
+                      color: primaryColorgreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                    height: 45,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: TextFormField(
+                      // showCursor: false,
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailController,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Enter the Name",
+                        hintText: "Enter the Email",
                         hintStyle: TextStyle(color: Colors.grey),
-                        prefixIcon: Icon(Icons.person)),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Email",
-                style: TextStyle(
-                    color: primaryColorgreen,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: TextFormField(
-                    // showCursor: false,
-                    keyboardType: TextInputType.emailAddress,
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter the Email",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(Icons.mail),
-                    ),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Phone Number",
-                style: TextStyle(
-                    color: primaryColorgreen,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: TextFormField(
-                    // showCursor: false,
-                    keyboardType: TextInputType.phone,
+                        prefixIcon: Icon(Icons.mail),
+                      ),
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Phone Number",
+                  style: TextStyle(
+                      color: primaryColorgreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                    height: 45,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: TextFormField(
+                      // showCursor: false,
+                      keyboardType: TextInputType.phone,
 
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter the phone number",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(Icons.phone),
-                    ),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+                      controller: passwordController,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Enter the phone number",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        prefixIcon: Icon(Icons.phone),
+                      ),
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),

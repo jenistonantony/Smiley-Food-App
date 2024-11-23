@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
@@ -66,8 +65,6 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(

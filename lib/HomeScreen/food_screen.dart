@@ -60,8 +60,6 @@ class _FoodScreenState extends State<FoodScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(
@@ -164,7 +162,7 @@ class _FoodScreenState extends State<FoodScreen> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 1.7,
+                height: MediaQuery.of(context).size.height / 1.8,
                 child: ResponsiveGridList(
                   listViewBuilderOptions: ListViewBuilderOptions(
                     physics: const NeverScrollableScrollPhysics(),
@@ -216,7 +214,7 @@ class _FoodScreenState extends State<FoodScreen> {
                                               Text(
                                                 products1[index]["restaurant"],
                                                 style: const TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 13,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey),
                                               ),
@@ -280,7 +278,7 @@ class _FoodScreenState extends State<FoodScreen> {
                                     children: [
                                       Image.asset(
                                         products1[index]["image1"],
-                                        height: 100,
+                                        height: 90,
                                       ),
                                     ],
                                   ),
