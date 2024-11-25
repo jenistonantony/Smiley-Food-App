@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 // import 'package:get/get.dart';
 
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/home_page.dart';
+import 'package:smiley_foods/controller/login_controller.dart';
 // import 'package:smiley_foods/controller/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController phoneController = TextEditingController();
-  // final LoginController loginController = Get.put(LoginController());
+  final LoginController loginController = Get.put(LoginController());
   static const socialIcons = [
     "assets/images/facebook.png",
     "assets/images/twitter.png",
@@ -90,23 +93,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()));
-                        // final mobileNo = phoneController.text.trim();
-                        // if (mobileNo.isNotEmpty) {
-                        //   loginController.loginUser(mobileNo: mobileNo);
-                        // } else {
-                        //   Get.snackbar(
-                        //     "Error",
-                        //     "Please enter your mobile number.",
-                        //     snackPosition: SnackPosition.BOTTOM,
-                        //   );
-                        // }
+                        final mobileNo = phoneController.text.trim();
+                        if (mobileNo.isNotEmpty) {
+                          loginController.login(mobileNo: mobileNo);
+                        } else {
+                          Get.snackbar(
+                            "Error",
+                            "Please enter your mobile number.",
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                        }
                       },
                       child: const Text(
-                        "Log In",
+                        "LOG IN",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

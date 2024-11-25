@@ -3,6 +3,8 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/categories_page.dart';
 import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
+import 'package:smiley_foods/ItemScreen/product2_item.dart';
+import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,28 +15,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Map<String, dynamic>> restaurant = [
-    {
-      "names": "Rose Restaurant",
-      "images": "assets/images/restaurant1.jpg",
-    },
-    {
-      "names": "Golden Restaurant",
-      "images": "assets/images/restaurant2.jpg",
-    },
-    {
-      "names": "Alo Restaurant",
-      "images": "assets/images/restaurant3.jpg",
-    },
-  ];
-
-  List<Map<String, dynamic>> products = [
-    {"name": "All", "image": "assets/images/fire.png"},
-    {"name": "Hot Dog", "image": "assets/images/hot-dog.png"},
-    {"name": "Burger", "image": "assets/images/burger.png"},
-    {"name": "Samosa", "image": "assets/images/samosa.png"},
-    {"name": "Chicken", "image": "assets/images/chicken.png"},
-  ];
+  final restaurantItemController = RestaurantItem(image: "", name: "");
+  final product2InfoController =
+      Product2Item(name: '', image: '', restaurant: '', price: '');
   int selectedIndex = -1;
 
   final TextEditingController controller = TextEditingController();
@@ -203,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                   verticalGridMargin: 10,
                   minItemWidth: 100,
                   children: List.generate(
-                    products.length,
+                    products2Item.length,
                     (index) => GestureDetector(
                       onTap: () {
                         setState(() {
@@ -235,14 +218,14 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.grey.shade200,
                                 ),
                                 child: Image.asset(
-                                  products[index]["image"],
+                                  products2Item[index]["image"],
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
                             Flexible(
                               child: Text(
-                                products[index]["name"],
+                                products2Item[index]["name"],
                                 style: const TextStyle(
                                     fontSize: 12, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip,
@@ -297,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: restaurant.length,
+                    itemCount: restaurantItem.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                         verticalDirection: VerticalDirection.up,
@@ -325,7 +308,7 @@ class _HomePageState extends State<HomePage> {
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: AssetImage(
-                                            restaurant[index]["images"]),
+                                            restaurantItem[index]["images"]),
                                       ),
                                       borderRadius: const BorderRadius.vertical(
                                         top: Radius.circular(20),
@@ -346,7 +329,7 @@ class _HomePageState extends State<HomePage> {
                                           delay: const Duration(seconds: 2),
                                         ),
                                         child: Text(
-                                          restaurant[index]["names"],
+                                          restaurantItem[index]["names"],
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),

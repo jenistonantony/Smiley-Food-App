@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:smiley_foods/AuthScreen/login_page.dart';
 import 'package:smiley_foods/baseurl.dart';
-import 'package:smiley_foods/model/register_model.dart';
+
+import 'package:smiley_foods/model/token_model.dart';
 
 // URL of the Register API
 
-class RegisterController extends GetxController {
-  ResigterModel? hub;
+class TokenController extends GetxController {
+  TokemModel? hub;
 // Function to make a POST request
-  Future registerUser({
+  Future tokenapi({
     String? userName,
     String? email,
     String? userId,
@@ -24,8 +25,7 @@ class RegisterController extends GetxController {
         "email": email,
         "userId": userId,
         "mobileNo": mobileNo,
-        "registeredType": "app",
-        "role": "consumer"
+        "uuid": ""
       };
 
       // Send the POST request
@@ -38,7 +38,7 @@ class RegisterController extends GetxController {
       // Check the response status
       if (response.statusCode == 200) {
         var result = jsonDecode(response.body.toString());
-        hub = ResigterModel.fromJson(result);
+        hub = TokemModel.fromJson(result);
         Get.to(const LoginScreen());
         // Parse the JSON response into a Register object
       } else {

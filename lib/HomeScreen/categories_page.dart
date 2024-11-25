@@ -3,6 +3,8 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/food_screen.dart';
 import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
+import 'package:smiley_foods/ItemScreen/product2_item.dart';
+import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -13,28 +15,9 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  List<Map<String, dynamic>> restaurant = [
-    {
-      "names": "Rose Restaurant",
-      "images": "assets/images/restaurant1.jpg",
-    },
-    {
-      "names": "Golden Restaurant",
-      "images": "assets/images/restaurant2.jpg",
-    },
-    {
-      "names": "Alo Restaurant",
-      "images": "assets/images/restaurant3.jpg",
-    },
-  ];
+  final restaurantItemController = RestaurantItem(image: "", name: "");
 
-  List<Map<String, dynamic>> products = [
-    {"name": "Chicken", "image": "assets/images/chicken.png", "price": "50"},
-    {"name": "Hot Dog", "image": "assets/images/hot-dog.png", "price": "60"},
-    {"name": "Burger", "image": "assets/images/burger.png", "price": "70"},
-    {"name": "Samosa", "image": "assets/images/samosa.png", "price": "80"},
-    {"name": "Chicken", "image": "assets/images/chicken.png", "price": "45"},
-  ];
+  final product1InfoController = products2Item;
   int selectedIndex = -1;
 
   final TextEditingController controller = TextEditingController();
@@ -202,7 +185,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   verticalGridMargin: 10,
                   minItemWidth: 100,
                   children: List.generate(
-                    products.length,
+                    products2Item.length,
                     (index) => GestureDetector(
                       onTap: () {
                         setState(() {
@@ -242,7 +225,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
-                                                    products[index]["image"]))),
+                                                    products2Item[index]
+                                                        ["image"]))),
                                       ),
                                     ),
                                     const SizedBox(
@@ -257,7 +241,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                                       duration: const Duration(
                                                           seconds: 3)),
                                           child: Text(
-                                            products[index]["name"],
+                                            products2Item[index]["name"],
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -297,8 +281,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                                                 FontWeight
                                                                     .bold)),
                                                     TextSpan(
-                                                        text: products[index]
-                                                            ["price"],
+                                                        text:
+                                                            products2Item[index]
+                                                                ["price"],
                                                         style: const TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 10,
@@ -365,10 +350,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: restaurant.length,
+                  itemCount: restaurantItem.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      padding: EdgeInsets.symmetric(vertical: 15),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
@@ -386,8 +371,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image:
-                                        AssetImage(restaurant[index]["images"]),
+                                    image: AssetImage(
+                                        restaurantItem[index]["images"]),
                                   ),
                                   borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(20),
@@ -405,7 +390,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                         .incomingSlideInFromLeft(
                                             delay: const Duration(seconds: 2)),
                                     child: Text(
-                                      restaurant[index]["names"],
+                                      restaurantItem[index]["names"],
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),

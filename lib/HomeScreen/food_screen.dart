@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
+
+import 'package:smiley_foods/HomeScreen/restaurant_view_page.dart';
+import 'package:smiley_foods/ItemScreen/product1_item.dart';
+import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class FoodScreen extends StatefulWidget {
@@ -11,46 +15,9 @@ class FoodScreen extends StatefulWidget {
 }
 
 class _FoodScreenState extends State<FoodScreen> {
-  List<Map<String, dynamic>> restaurant = [
-    {
-      "names": "Rose Restaurant",
-      "images": "assets/images/restaurant1.jpg",
-    },
-    {
-      "names": "Golden Restaurant",
-      "images": "assets/images/restaurant2.jpg",
-    },
-    {
-      "names": "Alo Restaurant",
-      "images": "assets/images/restaurant3.jpg",
-    },
-  ];
-  List<Map<String, dynamic>> products1 = [
-    {
-      "name1": "Chicken",
-      "image1": "assets/images/chicken.png",
-      "restaurant": "Rose Restaurant",
-      "price": "75"
-    },
-    {
-      "name1": "Hot Dog",
-      "image1": "assets/images/hot-dog.png",
-      "restaurant": "Golden Restaurant",
-      "price": "55"
-    },
-    {
-      "name1": "Burger",
-      "image1": "assets/images/burger.png",
-      "restaurant": "Alo Restaurant",
-      "price": "85"
-    },
-    {
-      "name1": "Samosa",
-      "image1": "assets/images/samosa.png",
-      "restaurant": "Hub Restaurant",
-      "price": "65"
-    },
-  ];
+  final restaurantItemController = RestaurantItem(image: "", name: "");
+  final product1ItemController =
+      Product1Item(name1: "", image1: "", restaurant: "", price: "");
 
   int selectedIndex = -1;
 
@@ -162,7 +129,7 @@ class _FoodScreenState extends State<FoodScreen> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 1.8,
+                height: MediaQuery.of(context).size.height / 1.75,
                 child: ResponsiveGridList(
                   listViewBuilderOptions: ListViewBuilderOptions(
                     physics: const NeverScrollableScrollPhysics(),
@@ -173,12 +140,12 @@ class _FoodScreenState extends State<FoodScreen> {
                   verticalGridMargin: 1,
                   minItemWidth: 100,
                   children: List.generate(
-                    products1.length,
+                    products1Item.length,
                     (index) => GestureDetector(
                       child: Stack(
                         children: [
                           Container(
-                              height: 220,
+                              height: 210,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20)),
                               child: Column(
@@ -204,7 +171,7 @@ class _FoodScreenState extends State<FoodScreen> {
                                                 height: 60,
                                               ),
                                               Text(
-                                                products1[index]["name1"],
+                                                products1Item[index]["name1"],
                                                 style: const TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -212,7 +179,8 @@ class _FoodScreenState extends State<FoodScreen> {
                                               ),
                                               const SizedBox(height: 10),
                                               Text(
-                                                products1[index]["restaurant"],
+                                                products1Item[index]
+                                                    ["restaurant"],
                                                 style: const TextStyle(
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.bold,
@@ -234,8 +202,8 @@ class _FoodScreenState extends State<FoodScreen> {
                                                                   FontWeight
                                                                       .bold)),
                                                       TextSpan(
-                                                          text: products1[index]
-                                                              ["price"],
+                                                          text: products1Item[
+                                                              index]["price"],
                                                           style: const TextStyle(
                                                               color:
                                                                   Colors.black,
@@ -277,7 +245,7 @@ class _FoodScreenState extends State<FoodScreen> {
                                   Column(
                                     children: [
                                       Image.asset(
-                                        products1[index]["image1"],
+                                        products1Item[index]["image1"],
                                         height: 90,
                                       ),
                                     ],
@@ -304,116 +272,94 @@ class _FoodScreenState extends State<FoodScreen> {
                 height: MediaQuery.of(context).size.height / 1.15,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: restaurant.length,
+                  itemCount: restaurantItem.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          WidgetAnimator(
-                            incomingEffect:
-                                WidgetTransitionEffects.incomingSlideInFromLeft(
-                                    delay: const Duration(seconds: 1)),
-                            child: Container(
-                              height: 140,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage(restaurant[index]["images"]),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const RestaurantViewPage()));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            WidgetAnimator(
+                              incomingEffect: WidgetTransitionEffects
+                                  .incomingSlideInFromLeft(
+                                      delay: const Duration(seconds: 1)),
+                              child: Container(
+                                height: 140,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        restaurantItem[index]["images"]),
+                                  ),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                      bottom: Radius.circular(20)),
                                 ),
-                                borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                    bottom: Radius.circular(20)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                WidgetAnimator(
-                                  incomingEffect: WidgetTransitionEffects
-                                      .incomingSlideInFromLeft(
-                                          delay: const Duration(seconds: 2)),
-                                  child: Text(
-                                    restaurant[index]["names"],
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  WidgetAnimator(
+                                    incomingEffect: WidgetTransitionEffects
+                                        .incomingSlideInFromLeft(
+                                            delay: const Duration(seconds: 2)),
+                                    child: Text(
+                                      restaurantItem[index]["names"],
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              delay:
-                                                  const Duration(seconds: 4)),
-                                      child: Image.asset(
-                                        "assets/images/star.png",
-                                        height: 20,
-                                      ),
+                                  const SizedBox(height: 10),
+                                  WidgetAnimator(
+                                    incomingEffect: WidgetTransitionEffects
+                                        .incomingSlideInFromLeft(
+                                            delay: const Duration(seconds: 4)),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/star.png",
+                                          height: 20,
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text("4.7"),
+                                        const SizedBox(width: 10),
+                                        Image.asset(
+                                          "assets/images/delivery-truck.png",
+                                          height: 20,
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text("Free"),
+                                        const SizedBox(width: 10),
+                                        Image.asset(
+                                          "assets/images/clock.png",
+                                          height: 20,
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text("20 min"),
+                                      ],
                                     ),
-                                    const SizedBox(width: 5),
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              delay:
-                                                  const Duration(seconds: 4)),
-                                      child: const Text("4.7"),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              delay:
-                                                  const Duration(seconds: 4)),
-                                      child: Image.asset(
-                                        "assets/images/delivery-truck.png",
-                                        height: 20,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              delay:
-                                                  const Duration(seconds: 4)),
-                                      child: const Text("Free"),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              delay:
-                                                  const Duration(seconds: 4)),
-                                      child: Image.asset(
-                                        "assets/images/clock.png",
-                                        height: 20,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              delay:
-                                                  const Duration(seconds: 4)),
-                                      child: const Text("20 min"),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },

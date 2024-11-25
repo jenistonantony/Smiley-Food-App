@@ -46,6 +46,8 @@ dependencies:
   responsive_grid_list: ^1.4.0
   widget_and_text_animator: ^1.1.5
   http: ^1.2.2
+  motion: ^2.0.1
+  get_storage: ^2.1.1
   
  
   

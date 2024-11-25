@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smiley_foods/AuthScreen/login_page.dart';
+import 'package:smiley_foods/AuthScreen/verification_page.dart';
+import 'package:smiley_foods/HomeScreen/home_page.dart';
 
 import 'package:smiley_foods/SplashScreen/splash_screen.dart';
+import 'package:smiley_foods/controller/login_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +34,7 @@ class _MyAppState extends State<MyApp> {
           textTheme:
               GoogleFonts.ptSansCaptionTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: HomePage(),
     );
   }
 }

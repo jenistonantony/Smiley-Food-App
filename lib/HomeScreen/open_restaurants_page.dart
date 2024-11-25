@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/food_detail.dart';
 import 'package:smiley_foods/HomeScreen/restaurant_view_page.dart';
+import 'package:smiley_foods/ItemScreen/product1_item.dart';
+import 'package:smiley_foods/ItemScreen/product2_item.dart';
+import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
 
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
@@ -14,50 +18,9 @@ class OpenRestaurantPage extends StatefulWidget {
 }
 
 class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
-  List<Map<String, dynamic>> restaurant = [
-    {
-      "names": "Rose Restaurant",
-      "images": "assets/images/restaurant1.jpg",
-    },
-    {
-      "names": "Golden Restaurant",
-      "images": "assets/images/restaurant2.jpg",
-    },
-    {
-      "names": "Alo Restaurant",
-      "images": "assets/images/restaurant3.jpg",
-    },
-  ];
-
-  List<Map<String, dynamic>> products = [
-    {"name": "All", "image": "assets/images/fire.png"},
-    {"name": "Hot Dog", "image": "assets/images/hot-dog.png"},
-    {"name": "Burger", "image": "assets/images/burger.png"},
-    {"name": "Samosa", "image": "assets/images/samosa.png"},
-    {"name": "Chicken", "image": "assets/images/chicken.png"},
-  ];
-  List<Map<String, dynamic>> products1 = [
-    {
-      "name1": "Chicken",
-      "image1": "assets/images/chicken.png",
-      "restaurant": "Rose Restaurant"
-    },
-    {
-      "name1": "Hot Dog",
-      "image1": "assets/images/hot-dog.png",
-      "restaurant": "Golden Restaurant"
-    },
-    {
-      "name1": "Burger",
-      "image1": "assets/images/burger.png",
-      "restaurant": "Alo Restaurant"
-    },
-    {
-      "name1": "Samosa",
-      "image1": "assets/images/samosa.png",
-      "restaurant": "Hub Restaurant"
-    },
-  ];
+  final restaurantItemController = RestaurantItem(image: "", name: "");
+  final product1InfoController =
+      Product1Item(name1: '', image1: '', restaurant: '', price: '');
   int selectedIndex = -1;
 
   final TextEditingController controller = TextEditingController();
@@ -165,7 +128,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                   verticalGridMargin: 10,
                   minItemWidth: 100,
                   children: List.generate(
-                    products.length,
+                    products2Item.length,
                     (index) => GestureDetector(
                       onTap: () {
                         setState(() {
@@ -190,7 +153,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                products[index]["name"],
+                                products2Item[index]["name"],
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.clip,
@@ -217,7 +180,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                 height: 470,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: restaurant.length,
+                  itemCount: restaurantItem.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
@@ -255,7 +218,8 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                                 BorderRadius.circular(20),
                                             image: DecorationImage(
                                                 image: AssetImage(
-                                                  restaurant[index]["images"],
+                                                  restaurantItem[index]
+                                                      ["images"],
                                                 ),
                                                 fit: BoxFit.fill)),
                                       ),
@@ -273,7 +237,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                                         delay: const Duration(
                                                             seconds: 2)),
                                             child: Text(
-                                              restaurant[index]["names"],
+                                              restaurantItem[index]["names"],
                                               style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold),
@@ -345,7 +309,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                   verticalGridMargin: 1,
                   minItemWidth: 100,
                   children: List.generate(
-                    products1.length,
+                    products1Item.length,
                     (index) => GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -379,18 +343,18 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            products1[index]["image1"]),
+                                            products1Item[index]["image1"]),
                                         fit: BoxFit.cover)),
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                products1[index]["name1"],
+                                products1Item[index]["name1"],
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                products1[index]["restaurant"],
+                                products1Item[index]["restaurant"],
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,

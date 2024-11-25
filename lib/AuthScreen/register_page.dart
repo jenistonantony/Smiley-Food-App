@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smiley_foods/AuthScreen/login_page.dart';
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/controller/register_controller.dart';
+import 'package:smiley_foods/controller/token_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,7 +12,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  RegisterController register = Get.put(RegisterController());
+  TokenController token = Get.put(TokenController());
   final TextEditingController controller = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -171,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: primaryColor, borderRadius: BorderRadius.circular(15)),
           child: TextButton(
               onPressed: () {
-                register.registerUser(
+                token.tokenapi(
                     userName: controller.text.toString(),
                     email: emailController.text.toString(),
                     mobileNo: passwordController.text.toString());

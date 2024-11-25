@@ -4,9 +4,13 @@ import 'package:pinput/pinput.dart';
 import 'package:smiley_foods/AuthScreen/login_page.dart';
 
 import 'package:smiley_foods/Components/color.dart';
+import 'package:smiley_foods/HomeScreen/home_page.dart';
+import 'package:smiley_foods/const.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key});
+  String? phone;
+  String? otp;
+  VerificationPage({super.key, this.otp, this.phone});
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -90,26 +94,24 @@ class _VerificationPageState extends State<VerificationPage> {
               ],
             ),
           ),
-          const Center(
-            child: Text(
-              "Verification",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Center(
+            child: InkWell(
+              onTap: () {
+                print(signinotpvalue);
+              },
+              child: Text(
+                "Otp Verification",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           const SizedBox(height: 10),
           const Text(
-            "We have sent a code to your email",
+            "We have sent a code to your phone number",
             style: TextStyle(
                 fontSize: 15, fontWeight: FontWeight.bold, color: Colors.grey),
           ),
           const SizedBox(height: 10),
-          Text(
-            "example@gmail.com",
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey.shade700),
-          ),
           const SizedBox(height: 20),
           Container(
             height: 200,
@@ -133,6 +135,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Pinput(
+                      controller: codeController,
                       length: 4,
                       defaultPinTheme: defaultPinTheme,
                       focusedPinTheme: defaultPinTheme.copyWith(
@@ -179,10 +182,19 @@ class _VerificationPageState extends State<VerificationPage> {
                   color: primaryColor, borderRadius: BorderRadius.circular(15)),
               child: TextButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginScreen()));
+                    if (signinotpvalue == codeController.text.toString()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
+                    } else {
+                      print("invalid otp");
+                    }
+
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const LoginScreen()));
                   },
                   child: const Text(
                     "VERIFY CODE",

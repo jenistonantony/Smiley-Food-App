@@ -1,4 +1,4 @@
-import 'package:smiley_foods/OnboardingScreen/onboarding_info.dart';
+import 'package:smiley_foods/InfoScreen/onboarding_info.dart';
 
 class OnboardingItem {
   List<OnboardingInfo> items = [
