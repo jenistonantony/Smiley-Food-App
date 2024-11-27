@@ -318,11 +318,11 @@ class _FoodDetailState extends State<FoodDetail> {
                         const Text(
                           "\$32",
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
+                              fontSize: 22, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           height: 45,
-                          width: 150,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           decoration: BoxDecoration(
                               color: primaryColor,
                               borderRadius: BorderRadius.circular(20)),
@@ -381,7 +381,7 @@ class _FoodDetailState extends State<FoodDetail> {
                   ),
                   Container(
                     height: 45,
-                    width: 200,
+                    width: 180,
                     decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(20)),
