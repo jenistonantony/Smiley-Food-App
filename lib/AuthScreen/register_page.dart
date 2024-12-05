@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:smiley_foods/AuthScreen/login_page.dart';
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/controller/token_controller.dart';
+import 'package:smiley_foods/HomeScreen/home_page.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,7 +11,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TokenController token = Get.put(TokenController());
+  // TokenController token = Get.put(TokenController());
   final TextEditingController controller = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -35,7 +34,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Navigator.pop(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginScreen()));
+                          builder: (context) => LoginScreen(
+                                verificationId: '',
+                              )));
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
@@ -171,17 +172,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: primaryColor, borderRadius: BorderRadius.circular(15)),
           child: TextButton(
               onPressed: () {
-                token.tokenapi(
-                    userName: controller.text.toString(),
-                    email: emailController.text.toString(),
-                    mobileNo: passwordController.text.toString());
-                // Navigator.pop(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => const Lo2ginScreen()));
+                // token.register(
+                //     name: controller.text.toString(),
+                //     email: emailController.text.toString(),
+                //     mobileNo: passwordController.text.toString());
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
               },
               child: const Text(
-                "SIGN UP",
+                "Register",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,

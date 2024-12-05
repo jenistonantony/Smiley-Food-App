@@ -1,16 +1,27 @@
 import 'dart:async';
+import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pinput/pinput.dart';
-import 'package:smiley_foods/AuthScreen/login_page.dart';
+import 'package:smiley_foods/AuthScreen/register_page.dart';
 
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/home_page.dart';
 import 'package:smiley_foods/const.dart';
 
 class VerificationPage extends StatefulWidget {
-  String? phone;
-  String? otp;
-  VerificationPage({super.key, this.otp, this.phone});
+  // String? phone;
+  // String? otp;
+  VerificationPage({
+    super.key,
+    // this.otp,
+    // this.phone,
+    required this.verificationId,
+    required String mobilenumber,
+  });
+  String verificationId;
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -21,6 +32,7 @@ class _VerificationPageState extends State<VerificationPage> {
   bool isResendAllowed = false;
   int remainingSeconds = 30;
   Timer? timer;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -99,7 +111,7 @@ class _VerificationPageState extends State<VerificationPage> {
               onTap: () {
                 print(signinotpvalue);
               },
-              child: Text(
+              child: const Text(
                 "Otp Verification",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -136,7 +148,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     padding: const EdgeInsets.all(10),
                     child: Pinput(
                       controller: codeController,
-                      length: 4,
+                      length: 6,
                       defaultPinTheme: defaultPinTheme,
                       focusedPinTheme: defaultPinTheme.copyWith(
                         decoration: defaultPinTheme.decoration!.copyWith(
@@ -181,20 +193,35 @@ class _VerificationPageState extends State<VerificationPage> {
               decoration: BoxDecoration(
                   color: primaryColor, borderRadius: BorderRadius.circular(15)),
               child: TextButton(
-                  onPressed: () {
-                    if (signinotpvalue == codeController.text.toString()) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                  onPressed: () async {
+                    if (codeController.text.isEmpty) {
+                      Get.snackbar("error", "loging",
+                          backgroundColor: Colors.amber,
+                          duration: Duration(seconds: 5));
                     } else {
-                      print("invalid otp");
-                    }
+                      PhoneAuthCredential credential =
+                          PhoneAuthProvider.credential(
+                              verificationId: widget.verificationId!,
+                              smsCode: codeController.text);
 
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const LoginScreen()));
+                      // Sign the user in (or link) with the credential
+                      await auth.signInWithCredential(credential);
+                      // Navigator.push(
+                      //     context, MaterialPageRoute(builder: (context) => Home()));
+                    }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => (RegisterScreen())));
+
+                    // if (signinotpvalue == codeController.text.toString()) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => const HomePage()));
+                    // } else {
+                    //   print("invalid otp");
+                    // }
                   },
                   child: const Text(
                     "VERIFY CODE",

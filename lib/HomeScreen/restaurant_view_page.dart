@@ -87,55 +87,40 @@ class _RestaurantViewPageState extends State<RestaurantViewPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          WidgetAnimator(
-                            incomingEffect:
-                                WidgetTransitionEffects.incomingSlideInFromLeft(
-                                    delay: const Duration(seconds: 2)),
-                            child: const Text(
-                              "Alo Restaurant",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
+                          const Text(
+                            "Alo Restaurant",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8),
-                          WidgetAnimator(
-                            incomingEffect:
-                                WidgetTransitionEffects.incomingSlideInFromLeft(
-                                    delay: const Duration(seconds: 3)),
-                            child: const Text(
-                              "A simple restaurant provides good food at low cost in a casual, relaxed setting, focusing on quick service and everyday meals.",
-                              style: TextStyle(color: Colors.grey),
-                            ),
+                          const Text(
+                            "A simple restaurant provides good food at low cost in a casual, relaxed setting, focusing on quick service and everyday meals.",
+                            style: TextStyle(color: Colors.grey),
                           ),
                           const SizedBox(height: 10),
-                          WidgetAnimator(
-                            incomingEffect:
-                                WidgetTransitionEffects.incomingSlideInFromLeft(
-                                    delay: Duration(seconds: 4)),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/star.png",
-                                  height: 20,
-                                ),
-                                const SizedBox(width: 5),
-                                const Text("4.7"),
-                                const SizedBox(width: 10),
-                                Image.asset(
-                                  "assets/images/delivery-truck.png",
-                                  height: 20,
-                                ),
-                                const SizedBox(width: 5),
-                                const Text("Free"),
-                                const SizedBox(width: 10),
-                                Image.asset(
-                                  "assets/images/clock.png",
-                                  height: 20,
-                                ),
-                                const SizedBox(width: 5),
-                                const Text("20 min"),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/star.png",
+                                height: 20,
+                              ),
+                              const SizedBox(width: 5),
+                              const Text("4.7"),
+                              const SizedBox(width: 10),
+                              Image.asset(
+                                "assets/images/delivery-truck.png",
+                                height: 20,
+                              ),
+                              const SizedBox(width: 5),
+                              const Text("Free"),
+                              const SizedBox(width: 10),
+                              Image.asset(
+                                "assets/images/clock.png",
+                                height: 20,
+                              ),
+                              const SizedBox(width: 5),
+                              const Text("20 min"),
+                            ],
                           ),
                         ],
                       ),

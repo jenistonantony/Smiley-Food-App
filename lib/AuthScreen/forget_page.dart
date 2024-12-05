@@ -30,7 +30,9 @@ class _ForgetPageState extends State<ForgetPage> {
                   Navigator.pop(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginScreen()));
+                          builder: (context) => LoginScreen(
+                                verificationId: '',
+                              )));
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
@@ -108,7 +110,10 @@ class _ForgetPageState extends State<ForgetPage> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>   VerificationPage()));
+                        builder: (context) => VerificationPage(
+                              verificationId: '',
+                              mobilenumber: '',
+                            )));
               },
               child: const Text(
                 "SEND CODE",

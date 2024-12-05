@@ -362,22 +362,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            WidgetAnimator(
-                              incomingEffect: WidgetTransitionEffects
-                                  .incomingSlideInFromLeft(
-                                      delay: const Duration(seconds: 1)),
-                              child: Container(
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        restaurantItem[index]["images"]),
-                                  ),
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                      bottom: Radius.circular(20)),
+                            Container(
+                              height: 140,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                      restaurantItem[index]["images"]),
                                 ),
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                    bottom: Radius.circular(20)),
                               ),
                             ),
                             Padding(
@@ -385,86 +380,40 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  WidgetAnimator(
-                                    incomingEffect: WidgetTransitionEffects
-                                        .incomingSlideInFromLeft(
-                                            delay: const Duration(seconds: 2)),
-                                    child: Text(
-                                      restaurantItem[index]["names"],
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                  Text(
+                                    restaurantItem[index]["names"],
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 8),
-                                  WidgetAnimator(
-                                    incomingEffect: WidgetTransitionEffects
-                                        .incomingSlideInFromLeft(
-                                            delay: const Duration(seconds: 3)),
-                                    child: const Text(
-                                      "Burger - Chicken - Rice - Wings",
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
+                                  const Text(
+                                    "Burger - Chicken - Rice - Wings",
+                                    style: TextStyle(color: Colors.grey),
                                   ),
                                   const SizedBox(height: 10),
                                   Row(
                                     children: [
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: Image.asset(
-                                          "assets/images/star.png",
-                                          height: 20,
-                                        ),
+                                      Image.asset(
+                                        "assets/images/star.png",
+                                        height: 20,
                                       ),
                                       const SizedBox(width: 5),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: const Text("4.7"),
+                                      const Text("4.7"),
+                                      Image.asset(
+                                        "assets/images/delivery-truck.png",
+                                        height: 20,
                                       ),
                                       const SizedBox(width: 10),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: Image.asset(
-                                          "assets/images/delivery-truck.png",
-                                          height: 20,
-                                        ),
-                                      ),
                                       const SizedBox(width: 5),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: const Text("Free"),
-                                      ),
+                                      const Text("Free"),
                                       const SizedBox(width: 10),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: Image.asset(
-                                          "assets/images/clock.png",
-                                          height: 20,
-                                        ),
+                                      Image.asset(
+                                        "assets/images/clock.png",
+                                        height: 20,
                                       ),
                                       const SizedBox(width: 5),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                                delay:
-                                                    const Duration(seconds: 4)),
-                                        child: const Text("20 min"),
-                                      ),
+                                      const Text("20 min"),
                                     ],
                                   ),
                                 ],

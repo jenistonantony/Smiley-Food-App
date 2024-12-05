@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smiley_foods/AuthScreen/register_page.dart';
+import 'package:smiley_foods/AuthScreen/login_page.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/ItemScreen/onboarding_item.dart';
 
@@ -121,10 +121,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             pres.setBool("onBoarding", true);
 
             if (!mounted) return;
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const RegisterScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen(verificationId: '',)));
           },
           child: const Text(
             "Get Started",

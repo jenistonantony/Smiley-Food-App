@@ -1,29 +1,34 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-// import 'package:get/get.dart';
+import 'package:smiley_foods/AuthScreen/verification_page.dart';
 
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/HomeScreen/home_page.dart';
-import 'package:smiley_foods/controller/login_controller.dart';
-// import 'package:smiley_foods/controller/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key, required this.verificationId});
+  String verificationId;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController phoneController = TextEditingController();
-  final LoginController loginController = Get.put(LoginController());
+  final phoneController = TextEditingController();
+  // final loginController = Get.put(LoginController());
   static const socialIcons = [
     "assets/images/facebook.png",
     "assets/images/twitter.png",
     "assets/images/linkedin.png",
     "assets/images/google.png",
   ];
+
+  final formkey = GlobalKey<FormState>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+   String? selectedcountrycode ="+91";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    textInputAction: TextInputAction.done,
                     controller: phoneController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
@@ -86,23 +92,49 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 50, vertical: 12),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onPressed: () {
-                        final mobileNo = phoneController.text.trim();
-                        if (mobileNo.isNotEmpty) {
-                          loginController.login(mobileNo: mobileNo);
-                        } else {
-                          Get.snackbar(
-                            "Error",
-                            "Please enter your mobile number.",
-                            snackPosition: SnackPosition.BOTTOM,
-                          );
-                        }
+                      onPressed: () async {
+                        await FirebaseAuth.instance.verifyPhoneNumber(
+                          phoneNumber: selectedcountrycode!+phoneController.text.toString(),
+                          verificationCompleted:
+                              (PhoneAuthCredential credential) {
+                            String otp = credential.smsCode!;
+                            print('OTP received: $otp');
+                          },
+                          verificationFailed: (FirebaseAuthException e) {},
+                          codeSent: (String verificationId, int? resendToken) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VerificationPage(
+                                  mobilenumber:
+                                      '$selectedcountrycode${phoneController.text}',
+                                  verificationId: verificationId,
+                                ),
+                              ),
+                            );
+                          },
+                          codeAutoRetrievalTimeout: (String verificationId) {},
+                        );
+
+                        // final mobileNo = phoneController.text.trim();
+
+                        // if (mobileNo.isNotEmpty) {
+                        //   loginController.login(
+                        //     mobileNo: phoneController.text,
+                        //   );
+                        // } else {
+                        //   Get.snackbar(
+                        //     "Error",
+                        //     "Please enter your mobile number.",
+                        //     snackPosition: SnackPosition.BOTTOM,
+                        //   );
+                        // }
                       },
                       child: const Text(
                         "LOG IN",

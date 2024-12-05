@@ -199,89 +199,85 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            WidgetAnimator(
-                                incomingEffect: WidgetTransitionEffects
-                                    .incomingSlideInFromLeft(
-                                        delay: const Duration(seconds: 1)),
-                                child: Row(
-                                  children: [
-                                    WidgetAnimator(
-                                      incomingEffect: WidgetTransitionEffects
-                                          .incomingSlideInFromLeft(
-                                              duration:
-                                                  const Duration(seconds: 1)),
-                                      child: Container(
-                                        height: 120,
-                                        width: 150,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                  restaurantItem[index]
-                                                      ["images"],
-                                                ),
-                                                fit: BoxFit.fill)),
+                            Row(
+                              children: [
+                                WidgetAnimator(
+                                  incomingEffect: WidgetTransitionEffects
+                                      .incomingSlideInFromLeft(
+                                          duration:
+                                              const Duration(seconds: 1)),
+                                  child: Container(
+                                    height: 120,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                              restaurantItem[index]
+                                                  ["images"],
+                                            ),
+                                            fit: BoxFit.fill)),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      WidgetAnimator(
+                                        incomingEffect:
+                                            WidgetTransitionEffects
+                                                .incomingSlideInFromRight(
+                                                    delay: const Duration(
+                                                        seconds: 2)),
+                                        child: Text(
+                                          restaurantItem[index]["names"],
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      const SizedBox(height: 10),
+                                      Row(
                                         children: [
                                           WidgetAnimator(
                                             incomingEffect:
                                                 WidgetTransitionEffects
                                                     .incomingSlideInFromRight(
-                                                        delay: const Duration(
-                                                            seconds: 2)),
-                                            child: Text(
-                                              restaurantItem[index]["names"],
-                                              style: const TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
+                                                        delay:
+                                                            const Duration(
+                                                                seconds:
+                                                                    3)),
+                                            child: Image.asset(
+                                              "assets/images/star.png",
+                                              height: 20,
                                             ),
                                           ),
-                                          const SizedBox(height: 10),
-                                          Row(
-                                            children: [
-                                              WidgetAnimator(
-                                                incomingEffect:
-                                                    WidgetTransitionEffects
-                                                        .incomingSlideInFromRight(
-                                                            delay:
-                                                                const Duration(
-                                                                    seconds:
-                                                                        3)),
-                                                child: Image.asset(
-                                                  "assets/images/star.png",
-                                                  height: 20,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              WidgetAnimator(
-                                                incomingEffect:
-                                                    WidgetTransitionEffects
-                                                        .incomingSlideInFromRight(
-                                                            delay:
-                                                                const Duration(
-                                                                    seconds:
-                                                                        3)),
-                                                child: const Text(
-                                                  "4.7",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ],
+                                          const SizedBox(width: 5),
+                                          WidgetAnimator(
+                                            incomingEffect:
+                                                WidgetTransitionEffects
+                                                    .incomingSlideInFromRight(
+                                                        delay:
+                                                            const Duration(
+                                                                seconds:
+                                                                    3)),
+                                            child: const Text(
+                                              "4.7",
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.bold),
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
-                                )),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

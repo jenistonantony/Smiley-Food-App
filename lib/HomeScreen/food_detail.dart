@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smiley_foods/Components/color.dart';
+import 'package:smiley_foods/HomeScreen/cart_page.dart';
 import 'package:smiley_foods/ItemScreen/detail_item.dart';
 
 class FoodDetail extends StatefulWidget {
@@ -43,7 +44,7 @@ class _FoodDetailState extends State<FoodDetail> {
                         "Detail",
                         style: TextStyle(
                             color: primaryColor,
-                            fontSize: 15,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
                       const Spacer(),
@@ -379,19 +380,27 @@ class _FoodDetailState extends State<FoodDetail> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 45,
-                    width: 180,
-                    decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: const Center(
-                      child: Text(
-                        "Add to Cart",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CartPage()));
+                    },
+                    child: Container(
+                      height: 45,
+                      width: 180,
+                      decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: const Center(
+                        child: Text(
+                          "Add to Cart",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                   )

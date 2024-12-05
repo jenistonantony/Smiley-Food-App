@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/categories_page.dart';
@@ -21,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = -1;
 
   final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
