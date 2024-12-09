@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -44,11 +43,13 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
     }
 
     _locationData = await location.getLocation();
+
     setState(() {
-      log(_locationData.toString() as num);
+      debugPrint(_locationData.toString());
       mapController.move(
-          LatLng(_locationData?.latitude ?? 0, _locationData?.longitude ?? 16),
-          0);
+        LatLng(_locationData?.latitude ?? 0, _locationData?.longitude ?? 16),
+        0,
+      );
     });
   }
 
@@ -62,9 +63,9 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
             options: MapOptions(initialZoom: 5),
             children: [
               TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org{z}/{x}/{y}.png',
+                urlTemplate: "https:tile.openstreetmap.org/{z}/{x}/{y}.png",
                 userAgentPackageName: 'com.example.app',
-              )
+              ),
             ],
           ),
           SafeArea(

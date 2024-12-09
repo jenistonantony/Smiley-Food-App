@@ -7,7 +7,8 @@ import 'package:smiley_foods/ItemScreen/product2_item.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class RestaurantViewPage extends StatefulWidget {
-  const RestaurantViewPage({super.key});
+  final String imagePath;
+  const RestaurantViewPage({super.key, required this.imagePath});
 
   @override
   State<RestaurantViewPage> createState() => _RestaurantViewPageState();
@@ -70,10 +71,10 @@ class _RestaurantViewPageState extends State<RestaurantViewPage> {
                     Container(
                       margin: const EdgeInsets.all(8),
                       height: 140,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/restaurant4.jpg"),
+                          image: AssetImage(widget.imagePath.toString()),
                         ),
                         borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),

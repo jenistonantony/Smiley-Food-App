@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/categories_page.dart';
@@ -24,9 +24,72 @@ class _HomePageState extends State<HomePage> {
 
   final TextEditingController controller = TextEditingController();
 
+  int currentIndex = 0;
+  List<Widget> body = [
+    const Icon(Icons.person),
+    const Icon(Icons.person),
+    const Icon(Icons.person),
+    const Icon(Icons.person),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (int newIndex) {
+            setState(() {
+              currentIndex = newIndex;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                backgroundColor: primaryColor,
+                icon: InkWell(
+                  onTap: () {
+                    Get.toNamed('/Profile');
+                  },
+                  child: const Icon(
+                    Icons.person,
+                  ),
+                ),
+                label: "Profile"),
+            const BottomNavigationBarItem(
+                backgroundColor: primaryColor,
+                icon: Icon(Icons.shopping_cart),
+                label: "Cart"),
+            const BottomNavigationBarItem(
+                backgroundColor: primaryColor,
+                icon: Icon(Icons.notifications),
+                label: "Notification"),
+            const BottomNavigationBarItem(
+                backgroundColor: primaryColor,
+                icon: Icon(Icons.settings),
+                label: "Setting"),
+          ]),
+      // drawer: Drawer(
+      //     child: ListView(padding: EdgeInsets.zero, children: [
+      //   const DrawerHeader(
+      //     decoration: BoxDecoration(color: Colors.blue),
+      //     child: Text(
+      //       'Menu',
+      //       style: TextStyle(color: Colors.white, fontSize: 24),
+      //     ),
+      //   ),
+      //   ListTile(
+      //     leading: const Icon(Icons.home),
+      //     title: const Text('Home'),
+      //     onTap: () {
+      //       Navigator.pop(context); // Close the drawer
+      //     },
+      //   ),
+      //   ListTile(
+      //     leading: const Icon(Icons.settings),
+      //     title: const Text('Settings'),
+      //     onTap: () {
+      //       Navigator.pop(context); // Close the drawer
+      //     },
+      //   ),
+      // ])),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
@@ -34,11 +97,19 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 children: [
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade200, shape: BoxShape.circle),
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.menu))),
+                  Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              shape: BoxShape.circle),
+                          child: IconButton(
+                              onPressed: () {
+                                // Scaffold.of(context).openDrawer();
+                              },
+                              icon: const Icon(Icons.menu)));
+                    },
+                  ),
                   const SizedBox(width: 15),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,15 +153,16 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Positioned(
-                          left: 5.6,
+                          left: 30,
                           bottom: 28,
                           child: Container(
-                            height: 25,
-                            decoration: const BoxDecoration(
-                                color: primaryColor, shape: BoxShape.circle),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: primaryColor),
+                            child: const Center(
+                              child: Text(
                                 "2",
                                 style: TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.bold),

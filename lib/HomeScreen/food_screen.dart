@@ -5,7 +5,6 @@ import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/restaurant_view_page.dart';
 import 'package:smiley_foods/ItemScreen/product1_item.dart';
 import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
-import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class FoodScreen extends StatefulWidget {
   const FoodScreen({super.key});
@@ -279,8 +278,9 @@ class _FoodScreenState extends State<FoodScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const RestaurantViewPage()));
+                                builder: (context) => RestaurantViewPage(
+                                    imagePath: restaurantItem[index]
+                                        ["images"])));
                       },
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),

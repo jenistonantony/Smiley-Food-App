@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/track_order_page.dart';
 
@@ -98,12 +99,9 @@ class _AddCardPageState extends State<AddCardPage> {
                     ],
                   ),
                   const SizedBox(height: 50),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const TrackOrderPage()));
+                      Get.toNamed('/CongratulationPage');
                     },
                     child: Container(
                       height: 55,
@@ -112,10 +110,10 @@ class _AddCardPageState extends State<AddCardPage> {
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "ADD & MAKE PAYMENT",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

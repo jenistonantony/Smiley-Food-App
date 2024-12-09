@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/payment_page1.dart';
 import 'package:smiley_foods/ItemScreen/cart_item.dart';

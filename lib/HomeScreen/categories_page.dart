@@ -79,15 +79,16 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           ),
                         ),
                         Positioned(
-                          left: 5.6,
+                          left: 30,
                           bottom: 28,
                           child: Container(
-                            height: 25,
-                            decoration: const BoxDecoration(
-                                color: primaryColor, shape: BoxShape.circle),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: primaryColor),
+                            child: const Center(
+                              child: Text(
                                 "2",
                                 style: TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.bold),
@@ -350,10 +351,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
+                  
                   itemCount: restaurantItem.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,

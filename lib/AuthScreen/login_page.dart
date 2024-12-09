@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final formkey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-   String? selectedcountrycode ="+91";
+  String? selectedcountrycode = "+91";
 
   @override
   Widget build(BuildContext context) {
@@ -92,15 +92,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                        // padding: const EdgeInsets.symmetric(
+                        //     horizontal: 50, vertical: 12),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                       onPressed: () async {
                         await FirebaseAuth.instance.verifyPhoneNumber(
-                          phoneNumber: selectedcountrycode!+phoneController.text.toString(),
+                          phoneNumber: selectedcountrycode! +
+                              phoneController.text.toString(),
                           verificationCompleted:
                               (PhoneAuthCredential credential) {
                             String otp = credential.smsCode!;

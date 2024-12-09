@@ -63,15 +63,16 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                           ),
                         ),
                         Positioned(
-                          left: 5.6,
+                          left: 30,
                           bottom: 28,
                           child: Container(
-                            height: 25,
-                            decoration: const BoxDecoration(
-                                color: primaryColor, shape: BoxShape.circle),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: primaryColor),
+                            child: const Center(
+                              child: Text(
                                 "2",
                                 style: TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.bold),
@@ -187,8 +188,10 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const RestaurantViewPage()));
+                                builder: (context) => RestaurantViewPage(
+                                      imagePath: restaurantItem[index]
+                                          ["images"],
+                                    )));
                       },
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
@@ -204,18 +207,15 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                 WidgetAnimator(
                                   incomingEffect: WidgetTransitionEffects
                                       .incomingSlideInFromLeft(
-                                          duration:
-                                              const Duration(seconds: 1)),
+                                          duration: const Duration(seconds: 1)),
                                   child: Container(
                                     height: 120,
                                     width: 150,
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         image: DecorationImage(
                                             image: AssetImage(
-                                              restaurantItem[index]
-                                                  ["images"],
+                                              restaurantItem[index]["images"],
                                             ),
                                             fit: BoxFit.fill)),
                                   ),
@@ -227,11 +227,10 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       WidgetAnimator(
-                                        incomingEffect:
-                                            WidgetTransitionEffects
-                                                .incomingSlideInFromRight(
-                                                    delay: const Duration(
-                                                        seconds: 2)),
+                                        incomingEffect: WidgetTransitionEffects
+                                            .incomingSlideInFromRight(
+                                                delay:
+                                                    const Duration(seconds: 2)),
                                         child: Text(
                                           restaurantItem[index]["names"],
                                           style: const TextStyle(
@@ -246,10 +245,8 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                             incomingEffect:
                                                 WidgetTransitionEffects
                                                     .incomingSlideInFromRight(
-                                                        delay:
-                                                            const Duration(
-                                                                seconds:
-                                                                    3)),
+                                                        delay: const Duration(
+                                                            seconds: 3)),
                                             child: Image.asset(
                                               "assets/images/star.png",
                                               height: 20,
@@ -260,15 +257,12 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                                             incomingEffect:
                                                 WidgetTransitionEffects
                                                     .incomingSlideInFromRight(
-                                                        delay:
-                                                            const Duration(
-                                                                seconds:
-                                                                    3)),
+                                                        delay: const Duration(
+                                                            seconds: 3)),
                                             child: const Text(
                                               "4.7",
                                               style: TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
                                         ],

@@ -127,7 +127,7 @@ class _FoodDetailState extends State<FoodDetail> {
                     children: [
                       Container(
                         height: 55,
-                        width: 200,
+                        width: MediaQuery.of(context).size.width*0.7,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.grey)),
