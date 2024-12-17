@@ -91,6 +91,10 @@ class LoginController extends GetxController {
         userId = loginModel!.data!.data!.userId.toString();
         token = loginModel!.data!.token.toString();
         email = loginModel!.data!.data!.email.toString();
+        print(userId);
+        print(userToken);
+        print(username);
+        print(userphone);
 
         getStorage.write("usernumber", userphone);
         getStorage.write("username", username);

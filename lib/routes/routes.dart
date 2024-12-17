@@ -18,11 +18,12 @@ import 'package:smiley_foods/HomeScreen/profile.dart';
 import 'package:smiley_foods/HomeScreen/restaurant_overview_page.dart';
 import 'package:smiley_foods/HomeScreen/track_order_page.dart';
 import 'package:smiley_foods/OnboardingScreen/onboarding_view.dart';
+import 'package:smiley_foods/SplashScreen/splash_screen.dart';
 
 class RoutesClass {
   static String approute = '/';
   static final route = [
-    GetPage(name: '/', page: () => const HomePage()),
+    GetPage(name: '/', page: () => const SplashScreen()),
     GetPage(
         name: '/onboarding',
         page: () => const OnboardingScreen(),

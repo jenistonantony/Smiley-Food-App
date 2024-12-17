@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:smiley_foods/AuthScreen/login_page.dart';
+import 'package:smiley_foods/HomeScreen/home_page.dart';
 import 'package:smiley_foods/baseurl.dart';
 import 'package:smiley_foods/const.dart';
 
@@ -14,10 +14,10 @@ class RegisterController extends GetxController {
   var isRegistered = false.obs;
   var isRegisterLoading = false.obs;
   RegisterModel? registerModel;
-  Future<void> registerUser({
-    required String name,
-    required String email,
-    required String phone,
+  registeruser({
+    String? name,
+    String? email,
+    String? phone,
   }) async {
     try {
       isLoading(true); // Show loading state
@@ -25,15 +25,17 @@ class RegisterController extends GetxController {
       final response = await http.post(
           Uri.parse(ApiDomain.register), // Ensure this is the correct endpoint
           headers: <String, String>{
-            "Accept": "/"
+            "Accept": "*/*"
           },
           body: {
-            "name": name,
-            "email": email,
-            "mobileNo": phone,
+            "name": name.toString(),
+            "email": email.toString(),
+            "mobileNo": phone.toString(),
             "role": "consumer",
             "registeredType": "app"
           });
+      print(response.statusCode);
+
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
         if (data["status"] == false) {
@@ -50,6 +52,10 @@ class RegisterController extends GetxController {
           userId = registerModel!.data!.data!.userId.toString();
           token = registerModel!.data!.token.toString();
           email = registerModel!.data!.data!.email.toString();
+          print(userId);
+          print(userToken);
+          print(username);
+          print(userphone);
 
           Timer(const Duration(seconds: 0), () {
             getStorage.write("usernumber", userphone);
@@ -59,9 +65,9 @@ class RegisterController extends GetxController {
             getStorage.write("token", token);
           });
 
-          Get.to(LoginScreen);
+          //Get.to(LoginScreen);
 
-          // Get.to(const Home());
+          Get.to(const HomePage());
         }
       } else {
         print(response.statusCode);

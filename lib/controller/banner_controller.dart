@@ -8,9 +8,7 @@ import 'package:smiley_foods/model/banner_model.dart';
 class BannerController extends GetxController {
   BannerModel? bannermodel;
   var isDataLoading = false.obs;
-  Future bannerGet(String? picode) async {
-    String userid = getStorage.read("userId");
-    String usertoken = getStorage.read("token");
+  Future bannerGet() async {
     // print(userId);
     try {
       isDataLoading(true);
@@ -24,7 +22,7 @@ class BannerController extends GetxController {
           "Content-Type": "application/json",
         },
       );
-      //  print('banner address response${response.statusCode}');
+      print('banner address response${response.statusCode}');
       if (response.statusCode == 200 ||
           response.statusCode == 201 ||
           response.statusCode == 202) {

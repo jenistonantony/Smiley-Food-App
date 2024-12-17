@@ -10,6 +10,7 @@ import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
 
 import 'package:smiley_foods/controller/banner_controller.dart';
 import 'package:smiley_foods/controller/category_controller.dart';
+import 'package:smiley_foods/fontStyle.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,12 +35,12 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.person),
     const Icon(Icons.person),
   ];
-  // @override
-  // void initState() {
-  //   product.productGet(pincode);
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    bannerController.bannerGet();
+    // TODO: implement initState
+    super.initState();
+  }
 
   final isDataLoading = false.obs;
   // final RxList products1Item = [].obs;
@@ -305,11 +306,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
+              Text(
+                "See all Foods",
+                style: Heading,
+              ),
               Obx((() {
                 if (bannerController.isDataLoading.isTrue) {
                   return Center(
                       child: LoadingAnimationWidget.threeArchedCircle(
-                          color: primaryColor, size: 200));
+                          color: primaryColor, size: 50));
                 } else if (bannerController.bannermodel == null) {
                   return const SizedBox();
                 }

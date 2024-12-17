@@ -49,14 +49,16 @@ class TokenController extends GetxController {
         userId = id;
         userToken = token;
         print('user token $userToken');
-        await getStorage.write('mobileNo', mobileNo.toString());
+        await getStorage.write('usernumber', mobileNo.toString());
 
-        getStorage.write('user_id', id.toString());
-        getStorage.write('user_token', token.toString()).whenComplete(() => {
-              // Get.offAll(const HomeScreen()),
-            });
-        userId = getStorage.read("user_id");
-        userToken = getStorage.read("user_token");
+        getStorage.write('userId', id.toString());
+        getStorage.write('token', token.toString()).whenComplete(() {
+          // Get.offAll(const HomePage());
+        });
+        userId = getStorage.read("userId");
+        userToken = getStorage.read("token");
+        userphone = getStorage.read("usernumber");
+
         // Parse the JSON response into a Register object
       } else {
         // Get.to(  LoginScreen());

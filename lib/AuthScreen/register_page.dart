@@ -16,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  final RegisterController registerController = Get.put(RegisterController());
+  RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 250,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: lightGrey,
-                    borderRadius: BorderRadius.circular(20)),
+                    color: lightGrey, borderRadius: BorderRadius.circular(20)),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -131,10 +130,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   style:
                       ElevatedButton.styleFrom(backgroundColor: primaryColor),
                   onPressed: () {
-                    registerController.registerUser(
-                        name: nameController.toString(),
-                        email: emailController.toString(),
-                        phone: phoneController.toString());
+                    registerController.registeruser(
+                        name: nameController.text.toString(),
+                        email: emailController.text.toString(),
+                        phone: phoneController.text.toString());
                   },
                   child: const Text(
                     "Register",
