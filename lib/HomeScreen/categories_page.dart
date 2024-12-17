@@ -5,17 +5,20 @@ import 'package:smiley_foods/HomeScreen/food_screen.dart';
 import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
 import 'package:smiley_foods/ItemScreen/product2_item.dart';
 import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
+import 'package:smiley_foods/fontStyle.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({super.key});
+  CategoriesPage({
+    super.key,
+  });
 
   @override
   State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  final restaurantItemController = RestaurantItem(image: "", name: "");
+  final restaurantItemController = RestaurantItem();
 
   final product1InfoController = products2Item;
   int selectedIndex = -1;
@@ -24,83 +27,21 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Title(
+          color: primaryColor,
+          child: Text(
+            "All Categories",
+            style: Heading,
+          ),
+        ),
+        backgroundColor: lightGrey,
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade200, shape: BoxShape.circle),
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.menu))),
-                  const SizedBox(width: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "DELIVERY TO",
-                        style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Smiley Lap office",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey.shade600),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 18, left: 5),
-                    child: Icon(Icons.arrow_drop_down),
-                  ),
-                  const Spacer(),
-                  Container(
-                    height: 55,
-                    width: 50,
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 0, 30, 53),
-                        shape: BoxShape.circle),
-                    child: Stack(
-                      children: [
-                        const Center(
-                          child: Icon(
-                            Icons.shopping_bag_outlined,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Positioned(
-                          left: 30,
-                          bottom: 28,
-                          child: Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: primaryColor),
-                            child: const Center(
-                              child: Text(
-                                "2",
-                                style: TextStyle(
-                                    fontSize: 10, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(height: 20),
               Row(
                 children: [
@@ -348,10 +289,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height,
+                height: 850,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  
                   itemCount: restaurantItem.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(

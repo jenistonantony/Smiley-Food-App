@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:confetti/confetti.dart';
 
@@ -19,7 +17,6 @@ class _CongratulationAnimationPageState
     extends State<CongratulationAnimationPage> {
   final _controller = ConfettiController();
   bool isPlaying = false;
-  @override
   void display() {
     super.dispose();
     _controller.dispose();
@@ -37,7 +34,7 @@ class _CongratulationAnimationPageState
               Image.asset("assets/images/congratulation.png"),
               AnimatedButton(
                 height: 50,
-                width: 150,
+                width: 160,
                 text: 'Congratulation',
                 isReverse: true,
                 selectedTextColor: primaryColor,
@@ -53,7 +50,6 @@ class _CongratulationAnimationPageState
                     _controller.play();
                   }
                   isPlaying = !isPlaying;
-                  color:
                   Colors.deepPurple.shade300;
                 },
               ),

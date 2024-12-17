@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
-import 'package:smiley_foods/AuthScreen/login_page.dart';
 import 'package:smiley_foods/HomeScreen/home_page.dart';
 import 'package:smiley_foods/baseurl.dart';
 import 'package:smiley_foods/const.dart';
-
 import 'package:smiley_foods/model/token_model.dart';
 
 // URL of the Register API
@@ -72,67 +68,87 @@ class TokenController extends GetxController {
     }
   }
 
-  var isRegisterLoading = false.obs;
+  // var isRegisterLoading = false.obs;
 
-// api register
-  void register({
-    String? name,
-    referalCode,
-    uuid,
-    email,
-    otp,
-    mobileNo,
-  }) async {
-    try {
-      print("hello");
-      isRegisterLoading(true);
-      var response = await post(Uri.parse(ApiDomain.register),
-          headers: <String, String>{
-            "Accept": "/",
-            "Content-Type": "application/json; charset=utf-8"
-          },
-          body: jsonEncode(<String, dynamic>{
-            "name": name.toString(),
-            "email": email.toString(),
-            "mobileNo": mobileNo.toString(),
-            "role": "consumer",
-            "uuid": uuid.toString(),
-            "parentReferalCode": referalCode.toString()
-          }));
+  // void register({
+  //   required String name,
+  //   required String email,
+  //   required String phone,
+  // }) async {
+  //   try {
+  //     isRegisterLoading(true);
 
-      print(response.statusCode.toString());
-      if (response.statusCode == 200 ||
-          response.statusCode == 201 ||
-          response.statusCode == 202) {
-        print("account created successfully");
-        Get.snackbar(
-          'Registered',
-          'Successfully',
-          backgroundColor: Color.fromARGB(255, 168, 255, 170),
-          colorText: Colors.black,
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        tokenapi(mobileNo: mobileNo);
-        Timer(Duration(seconds: 2), () {
-          //Get.offAll(() => HomeScreen());
-        });
-      } else {
-        Get.snackbar(
-          'Registered Failed',
-          'E-Mail Already Exits!',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+  //     // Construct the request body
+  //     final requestBody = {
+  //       "name": name,
+  //       "email": email,
+  //       "mobileNo": phone,
+  //       "registeredType": "app",
+  //       "role": "consumer",
+  //     };
 
-        print("response${response.body}");
-      }
-    } catch (e) {
-      print(e.toString());
-    } finally {
-      Timer(Duration(seconds: 2), () {
-        isRegisterLoading(false);
-      });
-    }
-  }
+  //     // Send the POST request
+  //     final response = await post(
+  //       Uri.parse(ApiDomain.register),
+  //       headers: {"Content-Type": "application/json"},
+  //       body: requestBody,
+  //     );
+
+  //     // Log response status and body for debugging
+  //     print("Response Code: ${response.statusCode}");
+  //     print("Response Body: ${response.body}");
+
+  //     if (response.statusCode == 200) {
+  //       final data = jsonDecode(response.body);
+
+  //       // Check API response status
+  //       if (data["status"] == false) {
+  //         Get.snackbar(
+  //           "Registration Error",
+  //           data["message"].toString(),
+  //           backgroundColor: Colors.white,
+  //         );
+  //       } else {
+  //         // Parse response and save user details
+  //         final registerModel = RegisterModel.fromJson(data);
+
+  //         // Extract user details
+  //         final userId = registerModel.data?.userId;
+  //         final userName = registerModel.data?.userName;
+  //         final userPhone = registerModel.data?.mobileNo;
+  //         final userEmail = registerModel.data?.email;
+  //         final userToken = registerModel.data?.token;
+
+  //         // Save user details to local storage
+  //         await getStorage.write("userId", userId);
+  //         await getStorage.write("userName", userName);
+  //         await getStorage.write("userPhone", userPhone);
+  //         await getStorage.write("userEmail", userEmail);
+  //         await getStorage.write("token", userToken);
+
+  //         // Navigate to the LoginScreen
+  //         Get.to(() => LoginScreen(
+  //               verificationId: '',
+  //             ));
+  //       }
+  //     } else {
+  //       // Handle non-200 response codes
+  //       Get.snackbar(
+  //         "Registration Failed",
+  //         "Mobile number already exists or invalid details provided.",
+  //         backgroundColor: Colors.white,
+  //       );
+  //     }
+  //   } catch (e) {
+  //     // Handle exceptions
+  //     Get.snackbar(
+  //       "Error",
+  //       "An unexpected error occurred: $e",
+  //       backgroundColor: Colors.white,
+  //     );
+  //     print("Exception: $e");
+  //   } finally {
+  //     isRegisterLoading(false);
+  //   }
+  // }
 }

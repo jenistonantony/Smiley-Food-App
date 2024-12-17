@@ -1,13 +1,13 @@
 class Product1Item {
-  final String name1;
-  final String image1;
-  final String restaurant;
-  final String price;
+  final String? name1;
+  final String? image1;
+  final String? restaurant;
+  final String? price;
   Product1Item({
-    required this.name1,
-    required this.image1,
-    required this.restaurant,
-    required this.price,
+    this.name1,
+    this.image1,
+    this.restaurant,
+    this.price,
   });
 }
 

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/food_detail.dart';
-import 'package:smiley_foods/HomeScreen/restaurant_view_page.dart';
+import 'package:smiley_foods/HomeScreen/restaurant_overview_page.dart';
 import 'package:smiley_foods/ItemScreen/product1_item.dart';
 import 'package:smiley_foods/ItemScreen/product2_item.dart';
 import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
-
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class OpenRestaurantPage extends StatefulWidget {
@@ -18,9 +16,9 @@ class OpenRestaurantPage extends StatefulWidget {
 }
 
 class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
-  final restaurantItemController = RestaurantItem(image: "", name: "");
+  final restaurantItemController = RestaurantItem();
   final product1InfoController =
-      Product1Item(name1: '', image1: '', restaurant: '', price: '');
+      Product1Item();
   int selectedIndex = -1;
 
   final TextEditingController controller = TextEditingController();
@@ -178,7 +176,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                 ],
               ),
               SizedBox(
-                height: 470,
+                height: 460,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: restaurantItem.length,
@@ -188,9 +186,10 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RestaurantViewPage(
+                                builder: (context) => RestaurantOverviewPage(
                                       imagePath: restaurantItem[index]
                                           ["images"],
+                                      namepath: restaurantItem[index]["names"],
                                     )));
                       },
                       child: Container(
@@ -199,76 +198,67 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           children: [
-                            Row(
+                            WidgetAnimator(
+                              incomingEffect: WidgetTransitionEffects
+                                  .incomingSlideInFromLeft(
+                                      duration: const Duration(seconds: 1)),
+                              child: Container(
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                          restaurantItem[index]["images"],
+                                        ),
+                                        fit: BoxFit.fill)),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 WidgetAnimator(
                                   incomingEffect: WidgetTransitionEffects
-                                      .incomingSlideInFromLeft(
-                                          duration: const Duration(seconds: 1)),
-                                  child: Container(
-                                    height: 120,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                              restaurantItem[index]["images"],
-                                            ),
-                                            fit: BoxFit.fill)),
+                                      .incomingSlideInFromRight(
+                                          delay: const Duration(seconds: 2)),
+                                  child: Text(
+                                    restaurantItem[index]["names"],
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromRight(
-                                                delay:
-                                                    const Duration(seconds: 2)),
-                                        child: Text(
-                                          restaurantItem[index]["names"],
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    WidgetAnimator(
+                                      incomingEffect: WidgetTransitionEffects
+                                          .incomingSlideInFromRight(
+                                              delay:
+                                                  const Duration(seconds: 3)),
+                                      child: Image.asset(
+                                        "assets/images/star.png",
+                                        height: 20,
                                       ),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromRight(
-                                                        delay: const Duration(
-                                                            seconds: 3)),
-                                            child: Image.asset(
-                                              "assets/images/star.png",
-                                              height: 20,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 5),
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromRight(
-                                                        delay: const Duration(
-                                                            seconds: 3)),
-                                            child: const Text(
-                                              "4.7",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
+                                    ),
+                                    const SizedBox(width: 5),
+                                    WidgetAnimator(
+                                      incomingEffect: WidgetTransitionEffects
+                                          .incomingSlideInFromRight(
+                                              delay:
+                                                  const Duration(seconds: 3)),
+                                      child: const Text(
+                                        "4.7",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -288,7 +278,7 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 1.83,
+                height: MediaQuery.of(context).size.height / 1.85,
                 child: ResponsiveGridList(
                   listViewBuilderOptions: ListViewBuilderOptions(
                     physics: const NeverScrollableScrollPhysics(),
@@ -305,7 +295,12 @@ class _OpenRestaurantPageState extends State<OpenRestaurantPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const FoodDetail()));
+                                builder: (context) => FoodDetail(
+                                      imagePath: products1Item[index]["image1"],
+                                      restaurantPath: products1Item[index]
+                                          ["restaurant"],
+                                      namePath: products1Item[index]["name1"],
+                                    )));
                         // setState(() {
                         //   selectedIndex = index;
                         // });

@@ -1,10 +1,10 @@
 class Payment1Item {
-  final String paymentname;
-  final String paymentimage;
+  final String? paymentname;
+  final String? paymentimage;
 
   Payment1Item({
-    required this.paymentname,
-    required this.paymentimage,
+    this.paymentname,
+    this.paymentimage,
   });
 }
 

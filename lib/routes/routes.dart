@@ -11,14 +11,13 @@ import 'package:smiley_foods/HomeScreen/edit_profile_page.dart';
 import 'package:smiley_foods/HomeScreen/food_detail.dart';
 import 'package:smiley_foods/HomeScreen/food_screen.dart';
 import 'package:smiley_foods/HomeScreen/home_page.dart';
+import 'package:smiley_foods/HomeScreen/my_order_page.dart';
 import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
 import 'package:smiley_foods/HomeScreen/payment_page1.dart';
 import 'package:smiley_foods/HomeScreen/profile.dart';
 import 'package:smiley_foods/HomeScreen/restaurant_overview_page.dart';
-import 'package:smiley_foods/HomeScreen/restaurant_view_page.dart';
 import 'package:smiley_foods/HomeScreen/track_order_page.dart';
 import 'package:smiley_foods/OnboardingScreen/onboarding_view.dart';
-import 'package:smiley_foods/SplashScreen/splash_screen.dart';
 
 class RoutesClass {
   static String approute = '/';
@@ -31,17 +30,17 @@ class RoutesClass {
         transition: Transition.rightToLeft),
     GetPage(
         name: '/Login',
-        page: () => LoginScreen(verificationId: ''),
+        page: () => LoginScreen(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
         name: '/Otp',
-        page: () => VerificationPage(verificationId: '', mobilenumber: ''),
+        page: () => VerificationPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
         name: '/Register',
-        page: () => const RegisterScreen(),
+        page: () => RegisterPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
@@ -51,14 +50,19 @@ class RoutesClass {
         transition: Transition.downToUp),
     GetPage(
         name: '/Profile',
-        page: () => const ProfilePage(),
+        page: () => ProfilePage(),
+        transitionDuration: const Duration(milliseconds: 200),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: '/MyOrderPage',
+        page: () => const MyOrderPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
         name: '/AddressPage',
         page: () => const AddressPage(),
         transitionDuration: const Duration(milliseconds: 200),
-        transition: Transition.rightToLeft),
+        transition: Transition.leftToRight),
     GetPage(
         name: '/EditProfilePage',
         page: () => const EditProfilePage(),
@@ -66,7 +70,7 @@ class RoutesClass {
         transition: Transition.leftToRight),
     GetPage(
         name: '/Categories',
-        page: () => const CategoriesPage(),
+        page: () => CategoriesPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
@@ -76,7 +80,7 @@ class RoutesClass {
         transition: Transition.rightToLeft),
     GetPage(
         name: '/FoodDetail',
-        page: () => const FoodDetail(),
+        page: () => FoodDetail(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
@@ -84,16 +88,14 @@ class RoutesClass {
         page: () => const OpenRestaurantPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
-    GetPage(
-        name: '/RestaurantView',
-        page: () => const RestaurantViewPage(
-              imagePath: '',
-            ),
-        transitionDuration: const Duration(milliseconds: 200),
-        transition: Transition.rightToLeft),
+    // GetPage(
+    //     name: '/RestaurantView',
+    //     page: () => RestaurantViewPage(),
+    //     transitionDuration: const Duration(milliseconds: 200),
+    //     transition: Transition.rightToLeft),
     GetPage(
         name: '/RestaurantOverView',
-        page: () => const RestaurantOverviewPage(),
+        page: () => RestaurantOverviewPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),
     GetPage(
@@ -123,6 +125,11 @@ class RoutesClass {
         transition: Transition.rightToLeft),
     GetPage(
         name: '/TrackOrderScreen',
+        page: () => const TrackOrderPage(),
+        transitionDuration: const Duration(milliseconds: 200),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: '/',
         page: () => const TrackOrderPage(),
         transitionDuration: const Duration(milliseconds: 200),
         transition: Transition.rightToLeft),

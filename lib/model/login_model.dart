@@ -1,66 +1,86 @@
-// import 'dart:convert';
+import 'dart:convert';
 
-// LoginModel loginModelFromJson(String str) =>
-//     LoginModel.fromJson(json.decode(str));
+LoginModel loginModelFromJson(String str) =>
+    LoginModel.fromJson(json.decode(str));
 
-// String loginModelToJson(LoginModel data) => json.encode(data.toJson());
+String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
-// class LoginModel {
-//   int? code;
-//   bool? status;
-//   String? message;
-//   WelcomeData? data;
+class LoginModel {
+  int? code;
+  bool? status;
+  String? message;
+  LoginModelData? data;
 
-//   LoginModel({this.code, this.status, this.message, this.data});
+  LoginModel({
+    this.code,
+    this.status,
+    this.message,
+    this.data,
+  });
 
-//   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-//         code: json["code"],
-//         status: json["status"],
-//         message: json["message"],
-//         data: json["data"] == null ? null : WelcomeData.fromJson(json["data"]),
-//       );
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+        code: json["code"],
+        status: json["status"],
+        message: json["message"],
+        data: LoginModelData.fromJson(json["data"]),
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "code": code,
-//         "status": status,
-//         "message": message,
-//         "data": data?.toJson(),
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "status": status,
+        "message": message,
+        "data": data!.toJson(),
+      };
+}
 
-// class WelcomeData {
-//   String? token;
-//   DataDetails? data;
+class LoginModelData {
+  String? token;
+  DataData? data;
 
-//   WelcomeData({this.token, this.data});
+  LoginModelData({
+    this.token,
+    this.data,
+  });
 
-//   factory WelcomeData.fromJson(Map<String, dynamic> json) => WelcomeData(
-//         token: json["token"],
-//         data: json["data"] == null ? null : DataDetails.fromJson(json["data"]),
-//       );
+  factory LoginModelData.fromJson(Map<String, dynamic> json) => LoginModelData(
+        token: json["token"],
+        data: DataData.fromJson(json["data"]),
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "token": token,
-//         "data": data?.toJson(),
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "token": token,
+        "data": data!.toJson(),
+      };
+}
 
-// class DataDetails {
-//   String? mobileNo;
-//   String? uuid;
-//   String? role;
+class DataData {
+  String? userName;
+  String? email;
+  String? userId;
+  String? mobileNo;
+  String? uuid;
 
-//   DataDetails({this.mobileNo, this.uuid, this.role});
+  DataData({
+    this.userName,
+    this.email,
+    this.userId,
+    this.mobileNo,
+    this.uuid,
+  });
 
-//   factory DataDetails.fromJson(Map<String, dynamic> json) => DataDetails(
-//         mobileNo: json["mobileNo"],
-//         uuid: json["uuid"],
-//         role: json["role"],
-//       );
+  factory DataData.fromJson(Map<String, dynamic> json) => DataData(
+        userName: json["userName"],
+        email: json["email"],
+        userId: json["userId"],
+        mobileNo: json["mobileNo"],
+        uuid: json["uuid"],
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "mobileNo": mobileNo,
-//         "uuid": uuid,
-//         "role": role,
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "userName": userName,
+        "email": email,
+        "userId": userId,
+        "mobileNo": mobileNo,
+        "uuid": uuid,
+      };
+}

@@ -17,47 +17,171 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: BottomSheet(
+          onClosing: () {},
+          builder: (context) => Container(
+                height: 280,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                    color: lightGrey,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30))),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 20),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                "DELIVERY ADDRESS",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: grey),
+                              ),
+                              const Spacer(),
+                              TextButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                    "EDIT",
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        decorationColor: primaryColor,
+                                        decorationThickness: 2,
+                                        color: primaryColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ))
+                            ],
+                          ),
+                          Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: TextFormField(
+                                  controller: addressController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  decoration: const InputDecoration(
+                                      hintText: "Enter the address",
+                                      hintStyle: TextStyle(color: grey),
+                                      border: InputBorder.none),
+                                ),
+                              )),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              const Text(
+                                "TOTAL:",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: grey),
+                              ),
+                              const SizedBox(width: 10),
+                              const Text(
+                                "\$140",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Spacer(),
+                              GestureDetector(
+                                onTap: () {},
+                                child: const Row(
+                                  children: [
+                                    Text(
+                                      "Breakdown",
+                                      style: TextStyle(
+                                          color: primaryColor,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_right_sharp,
+                                      color: primaryColor,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PaymentPage1()));
+                            },
+                            child: Container(
+                              height: 55,
+                              width: 180,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: primaryColor),
+                              child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "PLACE ORDER",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ]),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Text(
+              "Cart",
+              style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                "DONE",
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    decorationColor: green,
+                    decorationThickness: 2,
+                    color: green,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              shape: BoxShape.circle),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                  Icons.arrow_back_ios_new_rounded))),
-                      const SizedBox(width: 15),
-                      const Text(
-                        "Cart",
-                        style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "DONE",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              decorationColor: primaryColorgreen,
-                              decorationThickness: 2,
-                              color: primaryColorgreen,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -79,7 +203,7 @@ class _CartPageState extends State<CartPage> {
                                           BorderSide.strokeAlignOutside,
                                       blurRadius: BorderSide.strokeAlignOutside)
                                 ],
-                                color: primarygreyshade200,
+                                color: lightGrey,
                                 borderRadius: BorderRadius.circular(20)),
                             child: Row(
                               children: [
@@ -244,140 +368,6 @@ class _CartPageState extends State<CartPage> {
             const SizedBox(
               height: 200,
             ),
-            Row(
-              children: [
-                Container(
-                  height: 280,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                      color: primarygreyshade200,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30))),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 20),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  "DELIVERY ADDRESS",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: primarygreyshade600),
-                                ),
-                                const Spacer(),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: const Text(
-                                      "EDIT",
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          decorationColor: primaryColor,
-                                          decorationThickness: 2,
-                                          color: primaryColor,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ))
-                              ],
-                            ),
-                            Container(
-                                height: 55,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: TextFormField(
-                                    controller: addressController,
-                                    keyboardType: TextInputType.streetAddress,
-                                    decoration: const InputDecoration(
-                                        hintText: "Enter the address",
-                                        hintStyle: TextStyle(
-                                            color: primarygreyshade600),
-                                        border: InputBorder.none),
-                                  ),
-                                )),
-                            const SizedBox(height: 20),
-                            Row(
-                              children: [
-                                const Text(
-                                  "TOTAL:",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: primarygreyshade600),
-                                ),
-                                const SizedBox(width: 10),
-                                const Text(
-                                  "\$140",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Spacer(),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: const Row(
-                                    children: [
-                                      Text(
-                                        "Breakdown",
-                                        style: TextStyle(
-                                            color: primaryColor,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.keyboard_arrow_right_sharp,
-                                        color: primaryColor,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PaymentPage1()));
-                              },
-                              child: Container(
-                                height: 55,
-                                width: 180,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: primaryColor),
-                                child: const Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "PLACE ORDER",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ]),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )
           ],
         ),
       ),

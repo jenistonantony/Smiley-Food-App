@@ -27,12 +27,8 @@ class _ForgetPageState extends State<ForgetPage> {
           children: [
             IconButton(
                 onPressed: () {
-                  Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginScreen(
-                                verificationId: '',
-                              )));
+                  Navigator.pop(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
@@ -71,7 +67,7 @@ class _ForgetPageState extends State<ForgetPage> {
               const Text(
                 "Email",
                 style: TextStyle(
-                    color: primaryColorgreen,
+                    color: green,
                     fontWeight: FontWeight.bold,
                     fontSize: 15),
               ),
@@ -110,10 +106,7 @@ class _ForgetPageState extends State<ForgetPage> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => VerificationPage(
-                              verificationId: '',
-                              mobilenumber: '',
-                            )));
+                        builder: (context) => VerificationPage()));
               },
               child: const Text(
                 "SEND CODE",

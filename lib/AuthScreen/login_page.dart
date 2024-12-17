@@ -1,14 +1,14 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:smiley_foods/AuthScreen/verification_page.dart';
+import 'package:get/get.dart';
 
 import 'package:smiley_foods/Components/color.dart';
+import 'package:smiley_foods/controller/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key, required this.verificationId});
-  String verificationId;
+  const LoginScreen({
+    super.key,
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final phoneController = TextEditingController();
-  // final loginController = Get.put(LoginController());
+  final loginController = Get.put(LoginController());
   static const socialIcons = [
     "assets/images/facebook.png",
     "assets/images/twitter.png",
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     "Phone Number",
                     style: TextStyle(
-                      color: primaryColorgreen,
+                      color: green,
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
@@ -99,43 +99,43 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onPressed: () async {
-                        await FirebaseAuth.instance.verifyPhoneNumber(
-                          phoneNumber: selectedcountrycode! +
-                              phoneController.text.toString(),
-                          verificationCompleted:
-                              (PhoneAuthCredential credential) {
-                            String otp = credential.smsCode!;
-                            print('OTP received: $otp');
-                          },
-                          verificationFailed: (FirebaseAuthException e) {},
-                          codeSent: (String verificationId, int? resendToken) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VerificationPage(
-                                  mobilenumber:
-                                      '$selectedcountrycode${phoneController.text}',
-                                  verificationId: verificationId,
-                                ),
-                              ),
-                            );
-                          },
-                          codeAutoRetrievalTimeout: (String verificationId) {},
-                        );
+                        // await FirebaseAuth.instance.verifyPhoneNumber(
+                        //   phoneNumber: selectedcountrycode! +
+                        //       phoneController.text.toString(),
+                        //   verificationCompleted:
+                        //       (PhoneAuthCredential credential) {
+                        //     String otp = credential.smsCode!;
+                        //     print('OTP received: $otp');
+                        //   },
+                        //   verificationFailed: (FirebaseAuthException e) {},
+                        //   codeSent: (String verificationId, int? resendToken) {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) => VerificationPage(
+                        //           mobilenumber:
+                        //               '$selectedcountrycode${phoneController.text}',
+                        //           verificationId: verificationId,
+                        //         ),
+                        //       ),
+                        //     );
+                        //   },
+                        //   codeAutoRetrievalTimeout: (String verificationId) {},
+                        // );
 
-                        // final mobileNo = phoneController.text.trim();
+                        final mobileNo = phoneController.text.trim();
 
-                        // if (mobileNo.isNotEmpty) {
-                        //   loginController.login(
-                        //     mobileNo: phoneController.text,
-                        //   );
-                        // } else {
-                        //   Get.snackbar(
-                        //     "Error",
-                        //     "Please enter your mobile number.",
-                        //     snackPosition: SnackPosition.BOTTOM,
-                        //   );
-                        // }
+                        if (mobileNo.isNotEmpty) {
+                          loginController.login(
+                            mobileNo: phoneController.text,
+                          );
+                        } else {
+                          Get.snackbar(
+                            "Error",
+                            "Please enter your mobile number.",
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                        }
                       },
                       child: const Text(
                         "LOG IN",

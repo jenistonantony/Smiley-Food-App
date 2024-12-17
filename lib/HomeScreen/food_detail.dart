@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/cart_page.dart';
 import 'package:smiley_foods/ItemScreen/detail_item.dart';
+import 'package:smiley_foods/fontStyle.dart';
 
 class FoodDetail extends StatefulWidget {
-  const FoodDetail({super.key});
+  String? imagePath;
+  String? namePath;
+  String? restaurantPath;
+  FoodDetail({super.key, this.imagePath, this.namePath, this.restaurantPath});
 
   @override
   State<FoodDetail> createState() => _FoodDetailState();
@@ -22,47 +26,23 @@ class _FoodDetailState extends State<FoodDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Title(
+          color: primaryColor,
+          child: Text(
+            "Detail",
+            style: Heading,
+          ),
+        ),
+        backgroundColor: lightGrey,
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
-              child: Column(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Column(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              shape: BoxShape.circle),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                  Icons.arrow_back_ios_new_rounded))),
-                      const SizedBox(width: 15),
-                      const Text(
-                        "Detail",
-                        style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const Spacer(),
-                      Container(
-                        height: 55,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            shape: BoxShape.circle),
-                        child: const Center(
-                          child: Icon(
-                            Icons.more_horiz,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   const SizedBox(height: 10),
                   Container(
                     height: 210,
@@ -93,7 +73,7 @@ class _FoodDetailState extends State<FoodDetail> {
                                 Column(
                                   children: [
                                     Image.asset(
-                                      "assets/images/chicken.png",
+                                      widget.imagePath.toString(),
                                       height: 200,
                                       width: 200,
                                     ),
@@ -127,25 +107,25 @@ class _FoodDetailState extends State<FoodDetail> {
                     children: [
                       Container(
                         height: 55,
-                        width: MediaQuery.of(context).size.width*0.7,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.grey)),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.food_bank),
-                                  SizedBox(
+                                  const Icon(Icons.food_bank),
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Text(
-                                    "Alo hub Restaurant",
-                                    style: TextStyle(
+                                    widget.namePath.toString(),
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   )
@@ -161,9 +141,9 @@ class _FoodDetailState extends State<FoodDetail> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Alo Restaurant",
-                        style: TextStyle(
+                      Text(
+                        widget.restaurantPath.toString(),
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
@@ -301,113 +281,116 @@ class _FoodDetailState extends State<FoodDetail> {
                   ),
                 ],
               ),
-            ),
-            Container(
-              height: 150,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.shade200),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "\$32",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                        Container(
-                          height: 45,
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          decoration: BoxDecoration(
-                              color: primaryColor,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                              height: 30,
-                                              width: 30,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  color: Colors.white),
-                                              child: const Icon(Icons.remove)),
-                                        ],
-                                      )),
-                                  const Text(
-                                    "2",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                              height: 30,
-                                              width: 30,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  color: Colors.white),
-                                              child: const Icon(Icons.add)),
-                                        ],
-                                      ))
-                                ],
-                              ),
-                            ],
+              Container(
+                height: 150,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.grey.shade200),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "\$32",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CartPage()));
-                    },
-                    child: Container(
-                      height: 45,
-                      width: 180,
-                      decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Center(
-                        child: Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
+                          Container(
+                            height: 45,
+                            width: 130,
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                height: 30,
+                                                width: 30,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.white),
+                                                child:
+                                                    const Icon(Icons.remove)),
+                                          ],
+                                        )),
+                                    const Text(
+                                      "2",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                height: 30,
+                                                width: 30,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.white),
+                                                child: const Icon(Icons.add)),
+                                          ],
+                                        ))
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CartPage()));
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 180,
+                        decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: const Center(
+                          child: Text(
+                            "Add to Cart",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

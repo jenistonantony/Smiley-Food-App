@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/add_card_page.dart';
 import 'package:smiley_foods/ItemScreen/payment1_item.dart';
@@ -13,8 +12,7 @@ class PaymentPage1 extends StatefulWidget {
 }
 
 class _PaymentPage1State extends State<PaymentPage1> {
-  final payment1ItemController =
-      Payment1Item(paymentname: '', paymentimage: '');
+  final payment1ItemController = Payment1Item();
   int selectedIndex = -1;
 
   var item = ['cash on delivery', 'visa', 'Master Card', 'Rupay', 'Debit Card'];
@@ -23,28 +21,17 @@ class _PaymentPage1State extends State<PaymentPage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Payment",
+          style: TextStyle(
+              color: primaryColor, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            Row(
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade200, shape: BoxShape.circle),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded))),
-                const SizedBox(width: 15),
-                const Text(
-                  "Payment",
-                  style: TextStyle(
-                      color: primaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
             SizedBox(
               height: 150,
               width: MediaQuery.of(context).size.width,
@@ -70,17 +57,18 @@ class _PaymentPage1State extends State<PaymentPage1> {
                           child: Column(
                             children: [
                               Container(
-                                height: 100,
-                                width: 100,
+                                height: 80,
+                                width: 80,
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: selectedIndex == index
                                             ? primaryColor
-                                            : primarygreyshade200),
+                                            : lightGrey),
                                     borderRadius: BorderRadius.circular(20),
-                                    color: primarygreyshade200),
+                                    color: lightGrey),
                                 child: Image.asset(
-                                    payment1item[index]["paymentimage"]),
+                                  payment1item[index]["paymentimage"],
+                                ),
                               ),
                               Text(
                                 payment1item[index]["paymentname"],
@@ -105,16 +93,13 @@ class _PaymentPage1State extends State<PaymentPage1> {
               child: Container(
                 height: 55,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(2, 3),
-                          color: Color.fromARGB(255, 218, 211, 211),
-                          spreadRadius: BorderSide.strokeAlignOutside,
-                          blurRadius: BorderSide.strokeAlignOutside)
-                    ],
-                    color: primarygreyshade200,
-                    borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(2, 3),
+                      color: Color.fromARGB(255, 218, 211, 211),
+                      spreadRadius: BorderSide.strokeAlignOutside,
+                      blurRadius: BorderSide.strokeAlignOutside)
+                ], color: lightGrey, borderRadius: BorderRadius.circular(20)),
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

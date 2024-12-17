@@ -1,13 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/HomeScreen/categories_page.dart';
-import 'package:smiley_foods/HomeScreen/open_restaurants_page.dart';
 import 'package:smiley_foods/ItemScreen/product2_item.dart';
 import 'package:smiley_foods/ItemScreen/restaurant_item.dart';
-import 'package:widget_and_text_animator/widget_and_text_animator.dart';
+
+import 'package:smiley_foods/controller/banner_controller.dart';
+import 'package:smiley_foods/controller/category_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,13 +19,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final restaurantItemController = RestaurantItem(image: "", name: "");
-  final product2InfoController =
-      Product2Item(name: '', image: '', restaurant: '', price: '');
+  final restaurantItemController = RestaurantItem();
+  final product2InfoController = Product2Item();
   int selectedIndex = -1;
-
+  CategoryController product = Get.put(CategoryController());
   final TextEditingController controller = TextEditingController();
+  BannerController bannerController = Get.put(BannerController());
 
+  int _current = 0;
   int currentIndex = 0;
   List<Widget> body = [
     const Icon(Icons.person),
@@ -31,6 +34,15 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.person),
     const Icon(Icons.person),
   ];
+  // @override
+  // void initState() {
+  //   product.productGet(pincode);
+  //   // TODO: implement initState
+  //   super.initState();
+  // }
+
+  final isDataLoading = false.obs;
+  // final RxList products1Item = [].obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,56 +55,38 @@ class _HomePageState extends State<HomePage> {
           },
           items: [
             BottomNavigationBarItem(
+              backgroundColor: primaryColor,
+              icon: InkWell(
+                onTap: () {
+                  Get.toNamed('/Profile');
+                },
+                child: const Icon(
+                  Icons.person,
+                ),
+              ),
+              label: "Profile",
+            ),
+            const BottomNavigationBarItem(
+              backgroundColor: primaryColor,
+              icon: Icon(Icons.shopping_cart),
+              label: "Cart",
+            ),
+            BottomNavigationBarItem(
                 backgroundColor: primaryColor,
                 icon: InkWell(
-                  onTap: () {
-                    Get.toNamed('/Profile');
-                  },
-                  child: const Icon(
-                    Icons.person,
-                  ),
-                ),
-                label: "Profile"),
-            const BottomNavigationBarItem(
-                backgroundColor: primaryColor,
-                icon: Icon(Icons.shopping_cart),
-                label: "Cart"),
-            const BottomNavigationBarItem(
-                backgroundColor: primaryColor,
-                icon: Icon(Icons.notifications),
-                label: "Notification"),
+                    onTap: () {
+                      Get.toNamed('/MyOrderPage');
+                    },
+                    child: const Icon(Icons.shopping_bag_outlined)),
+                label: "Order"),
             const BottomNavigationBarItem(
                 backgroundColor: primaryColor,
                 icon: Icon(Icons.settings),
                 label: "Setting"),
           ]),
-      // drawer: Drawer(
-      //     child: ListView(padding: EdgeInsets.zero, children: [
-      //   const DrawerHeader(
-      //     decoration: BoxDecoration(color: Colors.blue),
-      //     child: Text(
-      //       'Menu',
-      //       style: TextStyle(color: Colors.white, fontSize: 24),
-      //     ),
-      //   ),
-      //   ListTile(
-      //     leading: const Icon(Icons.home),
-      //     title: const Text('Home'),
-      //     onTap: () {
-      //       Navigator.pop(context); // Close the drawer
-      //     },
-      //   ),
-      //   ListTile(
-      //     leading: const Icon(Icons.settings),
-      //     title: const Text('Settings'),
-      //     onTap: () {
-      //       Navigator.pop(context); // Close the drawer
-      //     },
-      //   ),
-      // ])),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: Column(
             children: [
               Row(
@@ -100,14 +94,13 @@ class _HomePageState extends State<HomePage> {
                   Builder(
                     builder: (BuildContext context) {
                       return Container(
+                          height: 50,
                           decoration: BoxDecoration(
                               color: Colors.grey.shade200,
                               shape: BoxShape.circle),
-                          child: IconButton(
-                              onPressed: () {
-                                // Scaffold.of(context).openDrawer();
-                              },
-                              icon: const Icon(Icons.menu)));
+                          child: Image.asset(
+                            "assets/icon/icon.png",
+                          ));
                     },
                   ),
                   const SizedBox(width: 15),
@@ -139,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Spacer(),
                   Container(
-                    height: 55,
+                    height: 45,
                     width: 50,
                     decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 0, 30, 53),
@@ -152,9 +145,8 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                           ),
                         ),
-                        Positioned(
-                          left: 30,
-                          bottom: 28,
+                        Align(
+                          alignment: Alignment.topRight,
                           child: Container(
                             height: 20,
                             width: 20,
@@ -169,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -228,8 +220,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CategoriesPage()));
+                                      builder: (context) => CategoriesPage()));
                             },
                             child: const Text(
                               "See All",
@@ -314,192 +305,97 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Open Restaurants",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const OpenRestaurantPage()));
-                        },
-                        child: const Row(
-                          children: [
-                            Text(
-                              "See All",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: primaryColor,
-                              ),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 20,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: restaurantItem.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        verticalDirection: VerticalDirection.up,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                WidgetAnimator(
-                                  incomingEffect: WidgetTransitionEffects
-                                      .incomingSlideInFromLeft(
-                                    delay: const Duration(seconds: 1),
+              Obx((() {
+                if (bannerController.isDataLoading.isTrue) {
+                  return Center(
+                      child: LoadingAnimationWidget.threeArchedCircle(
+                          color: primaryColor, size: 200));
+                } else if (bannerController.bannermodel == null) {
+                  return const SizedBox();
+                }
+                return Stack(
+                  alignment: Alignment
+                      .bottomCenter, // Align the indicator at the bottom
+                  children: [
+                    CarouselSlider(
+                      items: bannerController.bannermodel!.data!.data!.map((e) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: SizedBox(
+                            height: 200,
+                            width: 450, // Adjust width to match your needs
+                            child: FadeInImage(
+                              placeholder: const AssetImage(
+                                  'assets/images/food1.jpg'), // Your placeholder image
+                              image: NetworkImage(e.imageUrl.toString()),
+                              fit: BoxFit.cover,
+                              height: 200,
+                              width: 450,
+                              fadeInDuration: const Duration(milliseconds: 300),
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                return const Center(
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    size: 50,
+                                    color: Colors.grey,
                                   ),
-                                  child: Container(
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            restaurantItem[index]["images"]),
-                                      ),
-                                      borderRadius: const BorderRadius.vertical(
-                                        top: Radius.circular(20),
-                                        bottom: Radius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                          delay: const Duration(seconds: 2),
-                                        ),
-                                        child: Text(
-                                          restaurantItem[index]["names"],
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      WidgetAnimator(
-                                        incomingEffect: WidgetTransitionEffects
-                                            .incomingSlideInFromLeft(
-                                          delay: const Duration(seconds: 3),
-                                        ),
-                                        child: const Text(
-                                          "Burger - Chicken - Rice - Wings",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromLeft(
-                                              delay: const Duration(seconds: 4),
-                                            ),
-                                            child: Image.asset(
-                                              "assets/images/star.png",
-                                              height: 20,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 5),
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromLeft(
-                                              delay: const Duration(seconds: 4),
-                                            ),
-                                            child: const Text("4.7"),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromLeft(
-                                              delay: const Duration(seconds: 4),
-                                            ),
-                                            child: Image.asset(
-                                              "assets/images/delivery-truck.png",
-                                              height: 20,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 5),
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromLeft(
-                                              delay: const Duration(seconds: 4),
-                                            ),
-                                            child: const Text("Free"),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromLeft(
-                                              delay: const Duration(seconds: 4),
-                                            ),
-                                            child: Image.asset(
-                                              "assets/images/clock.png",
-                                              height: 20,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 5),
-                                          WidgetAnimator(
-                                            incomingEffect:
-                                                WidgetTransitionEffects
-                                                    .incomingSlideInFromLeft(
-                                              delay: const Duration(seconds: 4),
-                                            ),
-                                            child: const Text("20 min"),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                );
+                              },
+                              placeholderErrorBuilder:
+                                  (context, error, stackTrace) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
                             ),
                           ),
-                        ],
-                      );
-                    },
-                  )
-                ],
-              )
+                        );
+                      }).toList(),
+                      options: CarouselOptions(
+                        height: MediaQuery.of(context).size.height / 6.2,
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        aspectRatio: 2.0,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        },
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: bannerController.bannermodel!.data!.data!
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                          return GestureDetector(
+                            // onTap: () => _controller.animateToPage(entry.key),
+                            child: Container(
+                              width: 8.0,
+                              height: 8.0,
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: (Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color.fromARGB(
+                                            255, 160, 157, 157)
+                                        : Colors.white)
+                                    .withOpacity(
+                                        _current == entry.key ? 0.9 : 0.4),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                );
+              })),
             ],
           ),
         ),
@@ -507,3 +403,113 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+// Obx(
+              //   () {
+              //     if (product.isDataLoading.isTrue) {
+              //       return const Center(child: CircularProgressIndicator());
+              //     }
+
+              //     return Column(
+              //       children: [
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             const Text(
+              //               "Open Restaurants",
+              //               style: TextStyle(
+              //                   fontWeight: FontWeight.bold, fontSize: 18),
+              //             ),
+              //             GestureDetector(
+              //               onTap: () {
+              //                 Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(
+              //                     builder: (context) =>
+              //                         const OpenRestaurantPage(),
+              //                   ),
+              //                 );
+              //               },
+              //               child: const Row(
+              //                 children: [
+              //                   Text(
+              //                     "See All",
+              //                     style: TextStyle(
+              //                       fontSize: 15,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: primaryColor,
+              //                     ),
+              //                   ),
+              //                   Icon(
+              //                     Icons.arrow_forward_ios_rounded,
+              //                     size: 20,
+              //                     color: Colors.grey,
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(
+              //           height: 200,
+              //           child: ListView.builder(
+              //             physics: const NeverScrollableScrollPhysics(),
+              //             shrinkWrap: true,
+              //             itemCount: product.productModel!.data!.length,
+              //             itemBuilder: (BuildContext context, int index) {
+              //                return InkWell(
+              //                 onTap: () {
+              //                   Get.to(RestaurantOverviewPage(
+              //                     imagePath:product.productModel!.data![index].imgUrl ?? "",
+              //                     namepath: product.productModel!.data![index].categoryName ?? "Unknown",
+              //                   ));
+              //                 },
+              //                 child: Container(
+              //                   margin:
+              //                       const EdgeInsets.symmetric(vertical: 10),
+              //                   decoration: BoxDecoration(
+              //                     color: Colors.grey.shade200,
+              //                     borderRadius: BorderRadius.circular(20),
+              //                   ),
+              //                   child: Column(
+              //                     crossAxisAlignment: CrossAxisAlignment.start,
+              //                     children: [
+              //                       Container(
+              //                         height: 100,
+              //                         decoration: BoxDecoration(
+              //                           image: DecorationImage(
+              //                             fit: BoxFit.cover,
+              //                             image: product.productModel!.data![index].imgUrl != null
+              //                                 ? AssetImage(product.productModel!.data![index].imgUrl.toString())
+              //                                 : const AssetImage(
+              //                                         'assets/images/placeholder.png')
+              //                                     as ImageProvider,
+              //                           ),
+              //                           borderRadius:
+              //                               const BorderRadius.vertical(
+              //                             top: Radius.circular(20),
+              //                             bottom: Radius.circular(20),
+              //                           ),
+              //                         ),
+              //                       ),
+              //                       Padding(
+              //                         padding: const EdgeInsets.all(10.0),
+              //                         child: Text(
+              //                          product.productModel!.data![index].categoryName?? "Unknown Category",
+              //                           style: const TextStyle(
+              //                             fontSize: 18,
+              //                             fontWeight: FontWeight.bold,
+              //                           ),
+              //                         ),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ),
+              //               );
+              //             },
+              //           ),
+              //         ),
+              //       ],
+              //     );
+              //   },
+              // ),

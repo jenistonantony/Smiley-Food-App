@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smiley_foods/Components/color.dart';
-import 'package:smiley_foods/HomeScreen/track_order_page.dart';
 
 class AddCardPage extends StatefulWidget {
-  const AddCardPage({Key? key}) : super(key: key);
+  const AddCardPage({super.key});
 
   @override
   State<AddCardPage> createState() => _AddCardPageState();
@@ -146,7 +145,7 @@ class _AddCardPageState extends State<AddCardPage> {
           style: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
-            color: primarygreyshade600,
+            color: grey,
           ),
         ),
         const SizedBox(height: 10),
@@ -154,7 +153,7 @@ class _AddCardPageState extends State<AddCardPage> {
           height: 55,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: primarygreyshade200,
+            color: lightGrey,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -165,7 +164,7 @@ class _AddCardPageState extends State<AddCardPage> {
               inputFormatters: inputFormatters,
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: const TextStyle(color: primarygreyshade600),
+                hintStyle: const TextStyle(color: grey),
                 border: InputBorder.none,
               ),
             ),

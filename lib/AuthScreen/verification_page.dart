@@ -7,18 +7,18 @@ import 'package:smiley_foods/AuthScreen/register_page.dart';
 
 import 'package:smiley_foods/Components/color.dart';
 import 'package:smiley_foods/const.dart';
+import 'package:smiley_foods/controller/login_controller.dart';
 
 class VerificationPage extends StatefulWidget {
-  // String? phone;
-  // String? otp;
+  String? otp;
+  String? mobilenumber;
   VerificationPage({
     super.key,
     // this.otp,
     // this.phone,
-    required this.verificationId,
-    required String mobilenumber,
+    this.otp,
+    this.mobilenumber,
   });
-  String verificationId;
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -30,6 +30,7 @@ class _VerificationPageState extends State<VerificationPage> {
   int remainingSeconds = 30;
   Timer? timer;
   FirebaseAuth auth = FirebaseAuth.instance;
+  LoginController login = Get.put(LoginController());
 
   @override
   void initState() {
@@ -73,6 +74,8 @@ class _VerificationPageState extends State<VerificationPage> {
     String enteredCode = codeController.text.trim();
     print("Verifying code: $enteredCode");
   }
+
+  bool showLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +139,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   const Text(
                     "Enter Code",
                     style: TextStyle(
-                        color: primaryColorgreen,
+                        color: green,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),
@@ -145,7 +148,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     padding: const EdgeInsets.all(10),
                     child: Pinput(
                       controller: codeController,
-                      length: 6,
+                      length: 4,
                       defaultPinTheme: defaultPinTheme,
                       focusedPinTheme: defaultPinTheme.copyWith(
                         decoration: defaultPinTheme.decoration!.copyWith(
@@ -187,31 +190,52 @@ class _VerificationPageState extends State<VerificationPage> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
             onPressed: () async {
-              if (codeController.text.isEmpty) {
-                Get.snackbar("error", "loging",
-                    backgroundColor: Colors.amber,
-                    duration: Duration(seconds: 5));
-              } else {
-                PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                    verificationId: widget.verificationId!,
-                    smsCode: codeController.text);
-
-                // Sign the user in (or link) with the credential
-                await auth.signInWithCredential(credential);
-                // Navigator.push(
-                //     context, MaterialPageRoute(builder: (context) => Home()));
-              }
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => (RegisterScreen())));
-
-              // if (signinotpvalue == codeController.text.toString()) {
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) => const HomePage()));
+              // if (codeController.text.isEmpty) {
+              //   Get.snackbar("error", "loging",
+              //       backgroundColor: Colors.amber,
+              //       duration: const Duration(seconds: 5));
               // } else {
-              //   print("invalid otp");
+              //   PhoneAuthCredential credential = PhoneAuthProvider.credential(
+              //       verificationId: widget.verificationIds.toString(),
+              //       smsCode: codeController.text);
+
+              //   // Sign the user in (or link) with the credential
+              //   await auth.signInWithCredential(credential);
+              //   // Navigator.push(
+              //   //     context, MaterialPageRoute(builder: (context) => Home()));
               // }
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => (RegisterPage())));
+
+              if (codeController.text.toString() == signinotpvalue) {
+                login.userValidate(phone: widget.mobilenumber);
+                setState(() {
+                  showLoading = true;
+                });
+                Future.delayed(const Duration(seconds: 3), () {
+                  setState(() {
+                    showLoading = false;
+                  });
+                });
+
+                print(widget.otp);
+                print(widget.mobilenumber);
+
+                // setState(() {
+                //   _errorMessage = 'Please enter OTP';
+                // });
+              } else if (widget.mobilenumber == null) {
+                Get.snackbar('Invalid', 'Wrong OTP', colorText: Colors.white);
+                print("Wrong otp.$codeController");
+                print(widget.otp);
+                Get.to(RegisterPage(
+                  number: widget.mobilenumber,
+                ));
+              } else if (codeController.text.isEmpty ||
+                  signinotpvalue != codeController.text) {
+                Get.snackbar('Invalid', 'Please Enter The Correct OTP',
+                    colorText: Colors.white, backgroundColor: primaryColor);
+              }
             },
             child: const Text(
               "VERIFY CODE",
